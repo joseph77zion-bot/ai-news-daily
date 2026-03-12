@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI ビジネス デイリーブリーフィング | 2026年3月12日</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary:   #0f4c81;
+      --accent:    #00b4d8;
+      --accent2:   #f77f00;
+      --bg:        #f0f4f8;
+      --card:      #ffffff;
+      --text:      #1a202c;
+      --muted:     #64748b;
+      --border:    #e2e8f0;
+      --success:   #10b981;
+      --warning:   #f59e0b;
+      --danger:    #ef4444;
+      --radius:    12px;
+      --shadow:    0 4px 20px rgba(0,0,0,.08);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #1a6fad 60%, #0e3a6e 100%);
+      color: #fff;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,.25);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .header-brand { display: flex; align-items: center; gap: 12px; }
+    .header-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,.15);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .header-title { font-size: 1.25rem; font-weight: 700; letter-spacing: .02em; }
+    .header-subtitle { font-size: .78rem; opacity: .75; margin-top: 2px; }
+    .header-date {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: .82rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ===== HERO BANNER ===== */
+    .hero {
+      background: linear-gradient(135deg, #0f4c81 0%, #1565c0 50%, #0288d1 100%);
+      color: #fff;
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+    .hero h1 { font-size: 2rem; font-weight: 800; margin-bottom: 10px; }
+    .hero p { font-size: 1rem; opacity: .85; max-width: 600px; margin: 0 auto 24px; }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 10px;
+      padding: 12px 20px;
+      text-align: center;
+    }
+    .hero-stat-num { font-size: 1.6rem; font-weight: 800; }
+    .hero-stat-label { font-size: .75rem; opacity: .8; margin-top: 2px; }
+
+    /* ===== NAVIGATION TABS ===== */
+    .nav-tabs {
+      background: var(--card);
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 73px;
+      z-index: 90;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .nav-tabs-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-tabs-inner::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      padding: 14px 20px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all .2s;
+    }
+    .tab-btn:hover { color: var(--primary); }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--accent); }
+
+    /* ===== MAIN LAYOUT ===== */
+    main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 60px; }
+
+    /* ===== SECTION ===== */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ===== SECTION TITLE ===== */
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ===== GRID ===== */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      border: 1px solid var(--border);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,.12); }
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .card-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .card-title { font-size: 1rem; font-weight: 700; line-height: 1.4; }
+    .card-source { font-size: .75rem; color: var(--muted); margin-top: 3px; }
+    .card-body { font-size: .88rem; color: #374151; line-height: 1.7; }
+    .card-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: .72rem;
+      font-weight: 600;
+      margin-right: 6px;
+      margin-top: 10px;
+    }
+
+    /* ===== HIGHLIGHT BOX ===== */
+    .highlight-box {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 16px 20px;
+      margin-top: 14px;
+      font-size: .88rem;
+    }
+    .highlight-box strong { color: var(--primary); }
+
+    /* ===== METRIC CARDS ===== */
+    .metric-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .metric-num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .metric-label { font-size: .82rem; color: var(--muted); }
+    .metric-change {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: .78rem;
+      font-weight: 600;
+      margin-top: 6px;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .metric-change.up { background: #d1fae5; color: #065f46; }
+    .metric-change.down { background: #fee2e2; color: #991b1b; }
+
+    /* ===== CHART CONTAINER ===== */
+    .chart-wrap {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+    .chart-title {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .chart-canvas-wrap { position: relative; height: 280px; }
+
+    /* ===== NEWS LIST ===== */
+    .news-item {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: transform .2s;
+    }
+    .news-item:hover { transform: translateX(4px); }
+    .news-num {
+      width: 34px; height: 34px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .news-content { flex: 1; }
+    .news-title { font-size: .97rem; font-weight: 700; margin-bottom: 6px; }
+    .news-desc { font-size: .85rem; color: #4b5563; line-height: 1.6; }
+    .news-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .news-badge {
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: .72rem;
+      font-weight: 600;
+    }
+
+    /* ===== RISK METER ===== */
+    .risk-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .risk-label { font-size: .85rem; width: 220px; flex-shrink: 0; }
+    .risk-bar-bg {
+      flex: 1;
+      height: 10px;
+      background: var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .risk-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 1s ease;
+    }
+    .risk-pct { font-size: .82rem; font-weight: 700; width: 40px; text-align: right; }
+
+    /* ===== TABLE ===== */
+    .data-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    .data-table th {
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .data-table td { padding: 11px 16px; border-bottom: 1px solid var(--border); }
+    .data-table tr:hover td { background: #f8fafc; }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* ===== TIMELINE ===== */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item { position: relative; margin-bottom: 20px; }
+    .timeline-dot {
+      position: absolute;
+      left: -22px; top: 4px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--card);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .timeline-date { font-size: .75rem; color: var(--muted); margin-bottom: 4px; }
+    .timeline-title { font-size: .92rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-desc { font-size: .83rem; color: #4b5563; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,.7);
+      text-align: center;
+      padding: 20px 24px;
+      font-size: .8rem;
+    }
+    footer strong { color: #fff; }
+
+    /* ===== COLOR UTILITIES ===== */
+    .bg-blue   { background: #dbeafe; }
+    .bg-green  { background: #d1fae5; }
+    .bg-orange { background: #ffedd5; }
+    .bg-red    { background: #fee2e2; }
+    .bg-purple { background: #ede9fe; }
+    .text-blue   { color: #1d4ed8; }
+    .text-green  { color: #065f46; }
+    .text-orange { color: #c2410c; }
+    .text-red    { color: #991b1b; }
+    .text-purple { color: #5b21b6; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.5rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .metric-num { font-size: 1.8rem; }
+    }
+
+    /* ===== SCROLL ANIMATION ===== */
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity .5s, transform .5s; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-icon">🤖</div>
+      <div>
+        <div class="header-title">AI ビジネス デイリーブリーフィング</div>
+        <div class="header-subtitle">世界のAI最新情報を毎朝8:00にお届け</div>
+      </div>
+    </div>
+    <div class="header-date">📅 2026年3月12日（木）</div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <h1>🌐 本日のAIビジネス最前線</h1>
+  <p>世界中の主要メディア・調査機関から厳選した15件のAIビジネス情報をお届けします</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">$8.9T</div>
+      <div class="hero-stat-label">世界AI設備投資予測<br>（2026〜30年）</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">49%</div>
+      <div class="hero-stat-label">生成AI・エージェントAI<br>平均ROI</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">58%</div>
+      <div class="hero-stat-label">「AIが2年以内に<br>主要成長エンジン」CEO比率</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">1500%</div>
+      <div class="hero-stat-label">AI関連不正活動<br>前年比増加率</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NAV TABS ===== -->
+<div class="nav-tabs">
+  <div class="nav-tabs-inner">
+    <button class="tab-btn active" onclick="showSection('overview')">📊 概要・ダッシュボード</button>
+    <button class="tab-btn" onclick="showSection('investment')">💰 投資・市場動向</button>
+    <button class="tab-btn" onclick="showSection('models')">🧠 AIモデル・技術</button>
+    <button class="tab-btn" onclick="showSection('workforce')">👥 労働・人材</button>
+    <button class="tab-btn" onclick="showSection('security')">🔒 セキュリティ・規制</button>
+    <button class="tab-btn" onclick="showSection('regions')">🗺️ 地域・産業別</button>
+  </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<main>
+
+  <!-- ===== SECTION: OVERVIEW ===== -->
+  <section id="overview" class="section active">
+    <h2 class="section-title">📊 本日のダッシュボード</h2>
+
+    <!-- KPI Cards -->
+    <div class="grid-3" style="margin-bottom:28px;">
+      <div class="metric-card fade-in">
+        <div class="metric-num text-blue">$8.9T</div>
+        <div class="metric-label">世界AI設備投資予測（2026〜30年）</div>
+        <div class="metric-change up">▲ 従来予測比 +11%</div>
+      </div>
+      <div class="metric-card fade-in">
+        <div class="metric-num text-green">49%</div>
+        <div class="metric-label">生成AI・エージェントAI 平均ROI</div>
+        <div class="metric-change up">▲ 前年比 +20%</div>
+      </div>
+      <div class="metric-card fade-in">
+        <div class="metric-num text-orange">$630B+</div>
+        <div class="metric-label">ハイパースケーラー4社の2026年設備投資</div>
+        <div class="metric-change up">▲ 過去最高水準</div>
+      </div>
+      <div class="metric-card fade-in">
+        <div class="metric-num text-purple">80%</div>
+        <div class="metric-label">AI投資を継続・拡大する米国大企業CEO比率</div>
+        <div class="metric-change up">▲ 前年比 +8pt</div>
+      </div>
+      <div class="metric-card fade-in">
+        <div class="metric-num" style="color:#ef4444;">1,500%</div>
+        <div class="metric-label">AI関連不正活動の前年比増加率</div>
+        <div class="metric-change down">▼ 要警戒</div>
+      </div>
+      <div class="metric-card fade-in">
+        <div class="metric-num text-blue">32M</div>
+        <div class="metric-label">AIが年間影響を与える職務数（Gartner予測）</div>
+        <div class="metric-change down">▼ 対策が急務</div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="grid-2" style="margin-bottom:28px;">
+      <div class="chart-wrap fade-in">
+        <div class="chart-title">📈 世界AI設備投資予測の修正（兆ドル）</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="investChart"></canvas>
+        </div>
+      </div>
+      <div class="chart-wrap fade-in">
+        <div class="chart-title">💼 CEOのAI投資配分（KPMG調査 2026）</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="ceoChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Takeaways Table -->
+    <div class="card fade-in">
+      <h3 class="section-title" style="font-size:1rem; border-bottom:none; margin-bottom:12px;">📋 本日のKey Takeaways</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>分野</th>
+            <th>主要ポイント</th>
+            <th>重要度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>💰 投資</strong></td>
+            <td>世界AI投資は2026〜30年で8.9兆ドル規模に拡大（シティグループ予測）</td>
+            <td><span class="news-badge bg-red text-red">最重要</span></td>
+          </tr>
+          <tr>
+            <td><strong>📈 ROI</strong></td>
+            <td>生成AI・エージェントAIのROIは49%（前年比+20%）、92%が投資リターンを実感</td>
+            <td><span class="news-badge bg-red text-red">最重要</span></td>
+          </tr>
+          <tr>
+            <td><strong>🏢 経営</strong></td>
+            <td>世界CEO58%が「AIは2年以内に主要成長エンジン」、80%がAI投資を継続</td>
+            <td><span class="news-badge bg-orange text-orange">重要</span></td>
+          </tr>
+          <tr>
+            <td><strong>🧠 モデル</strong></td>
+            <td>GPT-5.4・Claude Opus 4.6・Gemini 3.1が三つ巴競争。エージェントAIが本番稼働へ</td>
+            <td><span class="news-badge bg-orange text-orange">重要</span></td>
+          </tr>
+          <tr>
+            <td><strong>👥 労働</strong></td>
+            <td>AI影響は年間3,200万職務。アップスキリングが最大ROI（27%）を生む</td>
+            <td><span class="news-badge bg-orange text-orange">重要</span></td>
+          </tr>
+          <tr>
+            <td><strong>🔒 セキュリティ</strong></td>
+            <td>AI関連不正活動が1,500%増。CEOの91%がAIエージェントのリスクを懸念</td>
+            <td><span class="news-badge bg-red text-red">最重要</span></td>
+          </tr>
+          <tr>
+            <td><strong>⚖️ 規制</strong></td>
+            <td>欧州がAI規制でリード。米国は規制緩和路線。日本は行政AI化が加速</td>
+            <td><span class="news-badge bg-blue text-blue">注目</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: INVESTMENT ===== -->
+  <section id="investment" class="section">
+    <h2 class="section-title">💰 投資・市場動向</h2>
+
+    <div class="grid-2" style="margin-bottom:24px;">
+      <div class="chart-wrap fade-in">
+        <div class="chart-title">🌍 AI関連売上高予測の修正（兆ドル）</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+      <div class="chart-wrap fade-in">
+        <div class="chart-title">🎯 CEOのAI投資優先領域（KPMG 2026）</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="priorityChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-blue">🏦</div>
+          <div>
+            <div class="card-title">シティグループ、世界AI投資予測を8.9兆ドルに引き上げ</div>
+            <div class="card-source">📰 ロイター — 2026年3月11日</div>
+          </div>
+        </div>
+        <div class="card-body">
+          米金融大手シティグループは2026〜30年の世界AI関連設備投資予測を従来の8兆ドルから<strong>8.9兆ドル</strong>に上方修正。AI関連売上高も2.8兆ドルから<strong>3.3兆ドル</strong>へ引き上げた。Amazon、Microsoft、Alphabet、Metaの4大ハイパースケーラーによる2026年の設備投資合計は<strong>6,300億ドル超</strong>の見通し。
+        </div>
+        <div class="highlight-box">
+          <strong>ビジネスへの示唆：</strong>現在のハイパースケーラー株はアンダーパフォームしており、投資リターンと企業主導の生産性向上サイクルが見過ごされているとシティは指摘。長期的な投資機会として注目。
+        </div>
+        <span class="card-tag bg-blue text-blue">投資</span>
+        <span class="card-tag bg-green text-green">市場予測</span>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-green">📊</div>
+          <div>
+            <div class="card-title">KPMG調査: 米国CEOの80%がAI投資を継続・拡大</div>
+            <div class="card-source">📰 KPMG US CEO Outlook Pulse — 2026年3月10日</div>
+          </div>
+        </div>
+        <div class="card-body">
+          米国大企業100社のCEO調査で、<strong>77%がGenAIは過去1年で過大評価されたが、今後5〜10年の破壊的ポテンシャルは過小評価されている</strong>と回答。80%近くが総資本予算の5%以上をAIに投資。64%がGenAI投資のリターンは期待通りと評価。63%が2026年中にM&Aを積極的に追求予定。
+        </div>
+        <div class="highlight-box">
+          <strong>ビジネスへの示唆：</strong>AIへの投資は「任意」ではなく「必須」との認識が定着。真の変革的価値実現には、AIを新しいビジネスモデルに組み込むことが必要。
+        </div>
+        <span class="card-tag bg-blue text-blue">経営戦略</span>
+        <span class="card-tag bg-orange text-orange">M&A</span>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-purple">💡</div>
+          <div>
+            <div class="card-title">生成AI・エージェントAIのROIは49%（投資1ドルに対し1.49ドル）</div>
+            <div class="card-source">📰 Snowflake / Omdia調査 — 2026年3月10日</div>
+          </div>
+        </div>
+        <div class="card-body">
+          10カ国2,050人のビジネス・ITリーダーを対象とした調査で、生成AI・エージェントAIのROIは<strong>49%</strong>（前年比約20%増）と判明。92%がAI投資でリターンを実感。32%のアーリーアダプターがエージェントAIを本番稼働済み、25%が今後1年以内に本番稼働予定。コードの<strong>48%がAI生成</strong>、82%がコードテスト・バグ検出の改善を報告。
+        </div>
+        <div class="highlight-box">
+          <strong>ビジネスへの示唆：</strong>エージェントAIは「2030年の課題」ではなく「今現在の課題」。データ基盤と強固なガバナンスが成功の鍵。
+        </div>
+        <span class="card-tag bg-green text-green">ROI実績</span>
+        <span class="card-tag bg-purple text-purple">エージェントAI</span>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-orange">🌐</div>
+          <div>
+            <div class="card-title">EY調査: 世界CEO 1,200人の58%が「AIは2年以内に主要成長エンジンに」</div>
+            <div class="card-source">📰 EY-Parthenon CEO Outlook — 2026年3月9日</div>
+          </div>
+        </div>
+        <div class="card-body">
+          世界CEO 1,200人調査で、<strong>58%が今後2年以内にAIが主要な成長エンジンになる</strong>と予測。52%がすでに抜本的なトランスフォーメーションに着手。ただし「AIが期待を大きく上回る成果を上げた」と回答したCEOは<strong>わずか20%</strong>にとどまる。日本企業は世界と比べ相対的に前向きで、約70%が収益性の向上を見込む。
+        </div>
+        <div class="highlight-box">
+          <strong>日本企業への示唆：</strong>世界的に見ても日本企業のAI楽観度は高い。ただし「期待を大きく上回る成果」を出せている企業はまだ少なく、実装の質が問われる段階。
+        </div>
+        <span class="card-tag bg-blue text-blue">CEO調査</span>
+        <span class="card-tag bg-green text-green">日本</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: MODELS ===== -->
+  <section id="models" class="section">
+    <h2 class="section-title">🧠 AIモデル・技術動向</h2>
+
+    <div class="chart-wrap fade-in" style="margin-bottom:24px;">
+      <div class="chart-title">🏆 2026年3月 主要AIモデル比較</div>
+      <div class="chart-canvas-wrap">
+        <canvas id="modelChart"></canvas>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:24px;">
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-blue">⚡</div>
+          <div>
+            <div class="card-title">GPT-5.4 vs Claude Opus 4.6 vs Gemini 3.1 — 最新モデル三つ巴競争</div>
+            <div class="card-source">📰 複数メディア — 2026年3月</div>
+          </div>
+        </div>
+        <div class="card-body">
+          OpenAIが2026年3月5日に<strong>GPT-5.4</strong>をリリース（「プロフェッショナルワーク向け最高性能・効率モデル」）。AnthropicのClaude Opus 4.6（2026年2月リリース）、Google DeepMindのGemini 3.1と三つ巴の競争が続く。<br><br>
+          注目の動き：米国務省がトランプ大統領の指令によりAnthropicのClaudeモデルの使用を中止。GeminiとChatGPT、Copilotは引き続き承認。
+        </div>
+        <span class="card-tag bg-blue text-blue">OpenAI</span>
+        <span class="card-tag bg-purple text-purple">Anthropic</span>
+        <span class="card-tag bg-green text-green">Google</span>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-green">🔍</div>
+          <div>
+            <div class="card-title">Gemini Deep Research Agent APIが一般公開</div>
+            <div class="card-source">📰 Google / Zenn — 2026年3月</div>
+          </div>
+        </div>
+        <div class="card-body">
+          GoogleのGemini APIに自律型リサーチエージェント「Deep Research Agent」が追加。Interactions API（Beta）を通じて利用可能で、複雑な調査タスクを自律的に計画・検索・分析する。週50時間以上の削減事例も報告されており、リサーチ業務の自動化が加速。
+        </div>
+        <div class="highlight-box">
+          <strong>活用例：</strong>市場調査、競合分析、技術調査などの複雑なリサーチ業務を自律的に実行。人間は戦略的意思決定に集中できる。
+        </div>
+        <span class="card-tag bg-green text-green">Google</span>
+        <span class="card-tag bg-blue text-blue">エージェントAI</span>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-orange">📦</div>
+          <div>
+            <div class="card-title">オープンソースLLMの量子化・軽量化が加速</div>
+            <div class="card-source">📰 Hugging Face / Unsloth — 2026年3月</div>
+          </div>
+        </div>
+        <div class="card-body">
+          Hugging Faceでは1-bit量子化を含む超低ビット量子化モデルの更新が活発。DeepSeek-V3.1、Kimi K2 Thinkingなどの大規模モデルがスマートフォン・タブレットでも動作可能なサイズに圧縮。Apple Silicon、GeForce RTXなどのコンシューマーハードウェアでのLLM利用が促進される。
+        </div>
+        <div class="highlight-box">
+          <strong>ビジネスへの示唆：</strong>エッジデバイスでのAI推論が現実的に。クラウド依存度を下げたオンプレミスAI活用が加速する可能性。データプライバシー重視の企業に新たな選択肢。
+        </div>
+        <span class="card-tag bg-orange text-orange">オープンソース</span>
+        <span class="card-tag bg-blue text-blue">エッジAI</span>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-purple">🔬</div>
+          <div>
+            <div class="card-title">arXivに81本のAI論文が新規投稿 — 推論最適化・安全性評価が中心</div>
+            <div class="card-source">📰 arXiv.org — 2026年3月10日</div>
+          </div>
+        </div>
+        <div class="card-body">
+          2026年3月10日、arXiv.orgに81本のcs.AI分類論文が新規投稿。注目の研究：<br>
+          • <strong>Best-of-Tails</strong>: 推論時間アライメント手法、学習コスト削減<br>
+          • <strong>LEAD</strong>: 長期推論の「リカバリー不能」ボトルネックを解消<br>
+          • <strong>LieCraft</strong>: マルチエージェント環境でのLLM欺瞞能力評価フレームワーク<br>
+          • 金融派生商品のAIヘッジ、StarCraft IIでの戦略スケーリングなど実世界応用も活発
+        </div>
+        <span class="card-tag bg-purple text-purple">研究</span>
+        <span class="card-tag bg-red text-red">AI安全性</span>
+      </div>
+    </div>
+
+    <!-- Timeline of AI Model Releases -->
+    <div class="card fade-in">
+      <h3 class="section-title" style="font-size:1rem; border-bottom:none; margin-bottom:16px;">📅 2026年 主要AIモデルリリースタイムライン</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#1d4ed8;"></div>
+          <div class="timeline-date">2026年2月</div>
+          <div class="timeline-title">Claude Opus 4.6 (Anthropic) リリース</div>
+          <div class="timeline-desc">エンタープライズ向けで高評価。コーディング・分析能力が大幅向上。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#059669;"></div>
+          <div class="timeline-date">2026年2月</div>
+          <div class="timeline-title">Perplexity Computer Update (GPT-5.4 + Claude Opus 4.6対応)</div>
+          <div class="timeline-desc">複数の最新モデルを統合したリサーチ・コンピュータ機能を強化。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#7c3aed;"></div>
+          <div class="timeline-date">2026年3月5日</div>
+          <div class="timeline-title">GPT-5.4 (OpenAI) リリース</div>
+          <div class="timeline-desc">「プロフェッショナルワーク向け最高性能・効率モデル」として発表。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#d97706;"></div>
+          <div class="timeline-date">2026年3月（進行中）</div>
+          <div class="timeline-title">Gemini 3.1 (Google DeepMind) 競争激化</div>
+          <div class="timeline-desc">Deep Research Agent APIの一般公開と合わせ、エンタープライズ市場での存在感を強化。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: WORKFORCE ===== -->
+  <section id="workforce" class="section">
+    <h2 class="section-title">👥 労働・人材動向</h2>
+
+    <div class="grid-2" style="margin-bottom:24px;">
+      <div class="chart-wrap fade-in">
+        <div class="chart-title">📊 AIによる雇用影響の見通し（ManpowerGroup 2026）</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="workforceChart"></canvas>
+        </div>
+      </div>
+      <div class="chart-wrap fade-in">
+        <div class="chart-title">🎯 AI導入で最大ROIが出る領域（ManpowerGroup調査）</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="roiAreaChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-orange">⚠️</div>
+          <div>
+            <div class="card-title">GartnerがAIによる年間3,200万件の職務影響を予測</div>
+            <div class="card-source">📰 CIO.com / Gartner — 2026年3月</div>
+          </div>
+        </div>
+        <div class="card-body">
+          GartnerはAIが年間<strong>3,200万件の職務</strong>に影響を与えると予測。「採用回避」と「役割の統合」が主なパターン。ただし62%の雇用主がAIによって新しい役割が生まれると回答しており、単純な雇用削減ではなく役割の変容が中心。
+        </div>
+        <div class="highlight-box">
+          <strong>対応策：</strong>ManpowerGroup調査では、AI導入で最大のROIが出ているのは<strong>従業員のアップスキリング（27%）</strong>。人材育成への投資が最も効果的。
+        </div>
+        <span class="card-tag bg-orange text-orange">雇用変化</span>
+        <span class="card-tag bg-green text-green">新規雇用</span>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-blue">🔬</div>
+          <div>
+            <div class="card-title">Anthropic、AIの労働市場影響を独自指標で測定開始</div>
+            <div class="card-source">📰 Anthropic Research — 2026年3月</div>
+          </div>
+        </div>
+        <div class="card-body">
+          Anthropicが労働市場へのAI影響を測定する新たな指標を開発・公表。失業増加を含む有害な労働市場変化の早期検出を目的とする。AI企業が社会的責任として労働市場への影響測定を開始した初の本格的な取り組み。
+        </div>
+        <div class="highlight-box">
+          <strong>企業への示唆：</strong>AI導入戦略において、社会的影響の測定・開示が今後の標準になる可能性。ESGの観点からもAI労働影響の把握が重要に。
+        </div>
+        <span class="card-tag bg-purple text-purple">Anthropic</span>
+        <span class="card-tag bg-blue text-blue">社会的責任</span>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-green">📈</div>
+          <div>
+            <div class="card-title">AI人材争奪戦が激化 — 大手テックのポーチング問題</div>
+            <div class="card-source">📰 TechTarget — 2026年3月</div>
+          </div>
+        </div>
+        <div class="card-body">
+          AI人材の需要が急増する中、大手テック企業によるAI人材の引き抜きが深刻化。KPMG調査では61%のCEOが「必要なAI技術人材を採用できるか懸念している」と回答。AI人材不足が企業のAI戦略実行の最大のボトルネックになりつつある。
+        </div>
+        <div class="highlight-box">
+          <strong>対応策：</strong>既存従業員のアップスキリング（46%）と新規採用（34%）の組み合わせが主流。マネージドサービスの活用（14%）も選択肢。
+        </div>
+        <span class="card-tag bg-orange text-orange">人材不足</span>
+        <span class="card-tag bg-blue text-blue">採用戦略</span>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-purple">🇯🇵</div>
+          <div>
+            <div class="card-title">日本：生成AIとジョブ型雇用の交差点</div>
+            <div class="card-source">📰 日本経済新聞 — 2026年3月</div>
+          </div>
+        </div>
+        <div class="card-body">
+          日本では生成AIの普及とジョブ型雇用の議論が交差。AI導入企業の労働者調査では、仕事の質の向上に一定の効果を感じる一方、スキル価値の変化や雇用喪失への不安も顕在化。「プロンプトエンジニア」「AIトレーナー」など新職種が登場する一方、翻訳者・コールセンター業務への影響が具体化。
+        </div>
+        <span class="card-tag bg-green text-green">日本</span>
+        <span class="card-tag bg-blue text-blue">ジョブ型雇用</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: SECURITY ===== -->
+  <section id="security" class="section">
+    <h2 class="section-title">🔒 セキュリティ・規制動向</h2>
+
+    <!-- Risk Meter -->
+    <div class="card fade-in" style="margin-bottom:24px;">
+      <h3 class="section-title" style="font-size:1rem; border-bottom:none; margin-bottom:16px;">⚠️ CEOが懸念するAIセキュリティリスク（KPMG 2026調査）</h3>
+      <div id="riskMeter"></div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:24px;">
+      <div class="chart-wrap fade-in">
+        <div class="chart-title">🌍 AI規制の国際比較スコア（2026年）</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="regulationChart"></canvas>
+        </div>
+      </div>
+      <div class="chart-wrap fade-in">
+        <div class="chart-title">🚨 AI関連サイバー脅威の増加トレンド</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="threatChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-red">🚨</div>
+          <div>
+            <div class="card-title">AI関連不正活動が1,500%急増 — 2026年グローバル脅威レポート</div>
+            <div class="card-source">📰 2026 Global Threat Intelligence Report — 2026年3月</div>
+          </div>
+        </div>
+        <div class="card-body">
+          AI関連の不正活動が<strong>前年比1,500%増</strong>。33億件の認証情報漏洩がID型攻撃を促進。エージェントAIを活用したサイバー犯罪が急増。CrowdStrikeの2026年グローバル脅威レポートでは、攻撃者がAIを活用してサイバー攻撃のライフサイクル全体を加速させていることが明らかに。
+        </div>
+        <div class="highlight-box">
+          <strong>対応策：</strong>CEOの67%がサイバーセキュリティへの投資を増加。既存従業員のアップスキリング（58%）、新規採用（19%）、マネージドサービス（14%）の組み合わせが主流。
+        </div>
+        <span class="card-tag bg-red text-red">緊急</span>
+        <span class="card-tag bg-orange text-orange">サイバー攻撃</span>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-blue">🏛️</div>
+          <div>
+            <div class="card-title">欧州がAI規制でリード、米国・英国は後れ</div>
+            <div class="card-source">📰 Computing.co.uk — 2026年3月12日</div>
+          </div>
+        </div>
+        <div class="card-body">
+          AI規制の国際比較で欧州がトップ。EU AI Actが本格施行フェーズに入る一方、米国トランプ政権は「America's AI Action Plan」で規制緩和路線を維持。カザフスタンが2026年1月に独自AI法を導入し注目を集める。米国では小規模企業AI推進法（Small Business AI Advancement Act）が下院を通過。
+        </div>
+        <div class="highlight-box">
+          <strong>企業への示唆：</strong>欧州でビジネスを展開する企業はEU AI Actへの対応が急務。米国では規制緩和を活用した積極的なAI展開が可能な環境。
+        </div>
+        <span class="card-tag bg-blue text-blue">EU AI Act</span>
+        <span class="card-tag bg-orange text-orange">米国規制</span>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-orange">🔧</div>
+          <div>
+            <div class="card-title">MicrosoftがAIを悪用したサイバー攻撃の手口を詳細分析</div>
+            <div class="card-source">📰 Microsoft Security Blog — 2026年3月6日</div>
+          </div>
+        </div>
+        <div class="card-body">
+          脅威アクターがAIをサイバー攻撃のライフサイクル全体で活用していることを詳細に分析。ジェイルブレイキングを含む意図的・非意図的なモデル悪用が増加。AIが「攻撃者の技術」として機能し始めており、防御側も同様にAIを活用した対抗策が必要。
+        </div>
+        <span class="card-tag bg-orange text-orange">Microsoft</span>
+        <span class="card-tag bg-red text-red">脅威分析</span>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div class="card-icon bg-purple">🌐</div>
+          <div>
+            <div class="card-title">米国がAIチップ輸出規制の新ルールを検討中</div>
+            <div class="card-source">📰 ロイター — 2026年3月5日</div>
+          </div>
+        </div>
+        <div class="card-body">
+          米国当局がAIチップ輸出の新たな規制フレームワークを検討中。外国への輸出条件として米国への投資を要求する案も浮上。地政学的なAI覇権争いが激化する中、半導体サプライチェーンへの影響が懸念される。
+        </div>
+        <div class="highlight-box">
+          <strong>日本企業への示唆：</strong>米国のAIチップ輸出規制は日本企業のAI調達戦略にも影響する可能性。サプライチェーンの多様化と代替調達先の検討が重要。
+        </div>
+        <span class="card-tag bg-purple text-purple">地政学</span>
+        <span class="card-tag bg-blue text-blue">半導体</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: REGIONS ===== -->
+  <section id="regions" class="section">
+    <h2 class="section-title">🗺️ 地域・産業別動向</h2>
+
+    <div class="grid-3" style="margin-bottom:24px;">
+      <div class="news-item fade-in" style="flex-direction:column; gap:8px;">
+        <div style="font-size:1.5rem; text-align:center;">🇯🇵</div>
+        <div class="news-title" style="text-align:center;">日本</div>
+        <div class="news-desc">デジタル庁主導で約18万人の公務員向け生成AI環境「Gennai」の大規模試験運用を2026年5月から開始予定。行政DXの大きな一歩。AI導入企業の半数超が成果未達との調査も（戦略なきAI導入の成功率はわずか37%）。</div>
+        <span class="news-badge bg-blue text-blue">行政DX</span>
+        <span class="news-badge bg-orange text-orange">課題あり</span>
+      </div>
+      <div class="news-item fade-in" style="flex-direction:column; gap:8px;">
+        <div style="font-size:1.5rem; text-align:center;">🇺🇸</div>
+        <div class="news-title" style="text-align:center;">米国</div>
+        <div class="news-desc">トランプ政権の規制緩和路線でAI産業が加速。小規模企業AI推進法が下院通過。AIを導入した小売企業は未導入企業比で売上成長率2.3倍・利益成長率2.5倍の実績。ただしAI関連不正活動の急増で新たなサイバー戦略を発表。</div>
+        <span class="news-badge bg-green text-green">規制緩和</span>
+        <span class="news-badge bg-red text-red">セキュリティ</span>
+      </div>
+      <div class="news-item fade-in" style="flex-direction:column; gap:8px;">
+        <div style="font-size:1.5rem; text-align:center;">🇪🇺</div>
+        <div class="news-title" style="text-align:center;">欧州</div>
+        <div class="news-desc">EU AI Actが本格施行フェーズに入り、世界のAI規制をリード。軍事AIの民間転用に関するギャップが指摘されており、欧州の戦略的自律性とAI安全保障の議論が活発化。ミュンヘン安全保障会議でもAIセキュリティが主要議題に。</div>
+        <span class="news-badge bg-blue text-blue">EU AI Act</span>
+        <span class="news-badge bg-purple text-purple">規制リーダー</span>
+      </div>
+      <div class="news-item fade-in" style="flex-direction:column; gap:8px;">
+        <div style="font-size:1.5rem; text-align:center;">🇰🇷</div>
+        <div class="news-title" style="text-align:center;">韓国</div>
+        <div class="news-desc">2026年3月24〜25日にMARS 2026 AI・ロボット製造カンファレンスを開催予定。製造業のAI・ロボット移行加速をテーマに「K-AI City」への転換を議論。製造業DXにおけるAI・ロボット統合の最新事例を共有。</div>
+        <span class="news-badge bg-green text-green">製造業DX</span>
+        <span class="news-badge bg-orange text-orange">K-AI City</span>
+      </div>
+      <div class="news-item fade-in" style="flex-direction:column; gap:8px;">
+        <div style="font-size:1.5rem; text-align:center;">🌏</div>
+        <div class="news-title" style="text-align:center;">アジア全体</div>
+        <div class="news-desc">AI富豪が46人誕生（Hurun Global Rich List）。AIが急速にグローバルな富の再分配を引き起こしている。アジア太平洋地域では採用支援業界でマルチモーダルAI・エージェント機能の活用が加速。2026年は技術・業務・候補者の3つの変化が同時進行。</div>
+        <span class="news-badge bg-purple text-purple">富の変化</span>
+        <span class="news-badge bg-blue text-blue">採用DX</span>
+      </div>
+      <div class="news-item fade-in" style="flex-direction:column; gap:8px;">
+        <div style="font-size:1.5rem; text-align:center;">🏭</div>
+        <div class="news-title" style="text-align:center;">製造業</div>
+        <div class="news-desc">AIを導入した製造企業は未導入企業比で売上成長率2.3倍・利益成長率2.5倍。韓国のK-AI City構想、日本の製造業DXなど、アジアの製造業でAI・ロボット統合が加速。IBM調査では2026年の実践的な動きとして一貫したデータ準備・ガバナンスへの投資を推奨。</div>
+        <span class="news-badge bg-green text-green">成長実績</span>
+        <span class="news-badge bg-orange text-orange">DX加速</span>
+      </div>
+    </div>
+
+    <!-- Startup News -->
+    <div class="card fade-in">
+      <h3 class="section-title" style="font-size:1rem; border-bottom:none; margin-bottom:16px;">🚀 注目スタートアップ・資金調達動向</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#1d4ed8;"></div>
+          <div class="timeline-date">2026年3月10日</div>
+          <div class="timeline-title">Thinking Machines、NvidiaからAIチップ供給契約と資金調達を獲得</div>
+          <div class="timeline-desc">AIスタートアップのThinking MachinesがNvidiaとの大型チップ供給契約と資金調達を締結。Nvidiaのエコシステム拡大戦略の一環として注目。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#059669;"></div>
+          <div class="timeline-date">2026年3月（最新）</div>
+          <div class="timeline-title">Databricks、技術人材向けAIアシスタントをローンチ</div>
+          <div class="timeline-desc">データエンジニアリングとAI開発を支援する専門的なAIアシスタントを発表。エンタープライズデータ基盤の強化を狙う。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#7c3aed;"></div>
+          <div class="timeline-date">2026年3月（最新）</div>
+          <div class="timeline-title">Floyo AI、クラウドエースが国内初の認定リセールパートナーに</div>
+          <div class="timeline-desc">次世代AIクリエイティブプラットフォーム「Floyo AI」の認定リセールパートナーにクラウドエースが選出。オープンソースの生成AIワークフローを日本市場に展開。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <strong>AI ビジネス デイリーブリーフィング</strong> — 2026年3月12日（木）<br>
+  世界中の主要メディア・調査機関（ロイター、KPMG、EY、Snowflake、Gartner、Anthropic等）から情報を収集・分析しています。<br>
+  毎朝8:00 JST に更新されます。
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// ===== TAB SWITCHING =====
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  initChartsForSection(id);
+  setTimeout(triggerFadeIn, 100);
+}
+
+// ===== FADE IN =====
+function triggerFadeIn() {
+  document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 40) el.classList.add('visible');
+  });
+}
+window.addEventListener('scroll', triggerFadeIn);
+setTimeout(triggerFadeIn, 200);
+
+// ===== CHART REGISTRY =====
+const chartInstances = {};
+function destroyChart(id) {
+  if (chartInstances[id]) { chartInstances[id].destroy(); delete chartInstances[id]; }
+}
+
+// ===== CHARTS =====
+function initChartsForSection(section) {
+  if (section === 'overview' || section === undefined) {
+    initInvestChart();
+    initCeoChart();
+  }
+  if (section === 'investment') {
+    initRevenueChart();
+    initPriorityChart();
+  }
+  if (section === 'models') {
+    initModelChart();
+  }
+  if (section === 'workforce') {
+    initWorkforceChart();
+    initRoiAreaChart();
+  }
+  if (section === 'security') {
+    initRiskMeter();
+    initRegulationChart();
+    initThreatChart();
+  }
+}
+
+// Overview: Investment Chart
+function initInvestChart() {
+  destroyChart('investChart');
+  const ctx = document.getElementById('investChart').getContext('2d');
+  chartInstances['investChart'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['AI設備投資予測\n(2026-30年)', 'AI関連売上高予測\n(2026-30年)', 'ハイパースケーラー\n2026年設備投資'],
+      datasets: [
+        {
+          label: '修正前（兆ドル）',
+          data: [8.0, 2.8, 0.55],
+          backgroundColor: 'rgba(148,163,184,0.6)',
+          borderColor: 'rgba(148,163,184,1)',
+          borderWidth: 1,
+          borderRadius: 6,
+        },
+        {
+          label: '修正後（兆ドル）',
+          data: [8.9, 3.3, 0.63],
+          backgroundColor: ['rgba(0,180,216,0.8)', 'rgba(16,185,129,0.8)', 'rgba(247,127,0,0.8)'],
+          borderColor: ['rgba(0,180,216,1)', 'rgba(16,185,129,1)', 'rgba(247,127,0,1)'],
+          borderWidth: 1,
+          borderRadius: 6,
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: ctx => `$${ctx.raw}T` } } },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => `$${v}T` } } }
+    }
+  });
+}
+
+// Overview: CEO Budget Chart
+function initCeoChart() {
+  destroyChart('ceoChart');
+  const ctx = document.getElementById('ceoChart').getContext('2d');
+  chartInstances['ceoChart'] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['5〜10%配分', '11〜20%配分', '21〜30%配分', '5%未満'],
+      datasets: [{
+        data: [37, 35, 6, 22],
+        backgroundColor: ['#0f4c81','#00b4d8','#f77f00','#e2e8f0'],
+        borderWidth: 2, borderColor: '#fff'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right' },
+        tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.raw}%のCEO` } }
+      }
+    }
+  });
+}
+
+// Investment: Revenue Chart
+function initRevenueChart() {
+  destroyChart('revenueChart');
+  const ctx = document.getElementById('revenueChart').getContext('2d');
+  chartInstances['revenueChart'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['2026', '2027', '2028', '2029', '2030'],
+      datasets: [
+        {
+          label: '修正前予測（兆ドル）',
+          data: [0.4, 0.52, 0.62, 0.62, 0.6],
+          backgroundColor: 'rgba(148,163,184,0.5)',
+          borderRadius: 4,
+        },
+        {
+          label: '修正後予測（兆ドル）',
+          data: [0.48, 0.62, 0.72, 0.72, 0.76],
+          backgroundColor: 'rgba(16,185,129,0.7)',
+          borderRadius: 4,
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => `$${v}T` } } }
+    }
+  });
+}
+
+// Investment: Priority Chart
+function initPriorityChart() {
+  destroyChart('priorityChart');
+  const ctx = document.getElementById('priorityChart').getContext('2d');
+  chartInstances['priorityChart'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['従業員\nアップスキリング', 'イノベーション\n加速', '業務・ワークフロー\nへの組み込み', 'サプライチェーン\n最適化', 'サイバー\nセキュリティ'],
+      datasets: [{
+        label: 'CEOが注力する割合 (%)',
+        data: [61, 53, 52, 41, 67],
+        backgroundColor: ['#0f4c81','#00b4d8','#10b981','#f77f00','#ef4444'],
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { x: { beginAtZero: true, max: 100, ticks: { callback: v => `${v}%` } } }
+    }
+  });
+}
+
+// Models: Comparison Chart
+function initModelChart() {
+  destroyChart('modelChart');
+  const ctx = document.getElementById('modelChart').getContext('2d');
+  chartInstances['modelChart'] = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['コーディング', '推論・分析', '創造的タスク', 'エンタープライズ対応', 'コスト効率', 'マルチモーダル'],
+      datasets: [
+        {
+          label: 'GPT-5.4 (OpenAI)',
+          data: [88, 92, 85, 90, 82, 88],
+          borderColor: '#10a37f', backgroundColor: 'rgba(16,163,127,0.15)', pointBackgroundColor: '#10a37f',
+        },
+        {
+          label: 'Claude Opus 4.6 (Anthropic)',
+          data: [92, 90, 88, 93, 80, 82],
+          borderColor: '#c96442', backgroundColor: 'rgba(201,100,66,0.15)', pointBackgroundColor: '#c96442',
+        },
+        {
+          label: 'Gemini 3.1 (Google)',
+          data: [85, 88, 87, 88, 88, 92],
+          borderColor: '#4285f4', backgroundColor: 'rgba(66,133,244,0.15)', pointBackgroundColor: '#4285f4',
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: { r: { beginAtZero: true, max: 100, ticks: { stepSize: 20 } } }
+    }
+  });
+}
+
+// Workforce Charts
+function initWorkforceChart() {
+  destroyChart('workforceChart');
+  const ctx = document.getElementById('workforceChart').getContext('2d');
+  chartInstances['workforceChart'] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['雇用増加見込み（AI起因）', '変化なし', '削減（AI起因）', '削減（その他）'],
+      datasets: [{
+        data: [55, 36, 9, 0],
+        backgroundColor: ['#10b981','#94a3b8','#ef4444','#f59e0b'],
+        borderWidth: 2, borderColor: '#fff'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right' },
+        tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.raw}%` } }
+      }
+    }
+  });
+}
+
+function initRoiAreaChart() {
+  destroyChart('roiAreaChart');
+  const ctx = document.getElementById('roiAreaChart').getContext('2d');
+  chartInstances['roiAreaChart'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['従業員\nアップスキリング', '顧客体験\n向上', 'プロセス\n自動化', 'コスト\n削減', 'データ分析\n高度化'],
+      datasets: [{
+        label: 'ROI貢献度 (%)',
+        data: [27, 22, 20, 18, 13],
+        backgroundColor: ['#0f4c81','#00b4d8','#10b981','#f77f00','#8b5cf6'],
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, max: 35, ticks: { callback: v => `${v}%` } } }
+    }
+  });
+}
+
+// Security: Risk Meter
+function initRiskMeter() {
+  const risks = [
+    { label: 'AIエージェントのデータ・プライバシーリスク', pct: 91, color: '#ef4444' },
+    { label: 'AI支援マルウェア攻撃', pct: 91, color: '#ef4444' },
+    { label: 'AI支援フィッシング攻撃', pct: 89, color: '#f59e0b' },
+    { label: 'AIエージェントのインサイダー脅威', pct: 80, color: '#f59e0b' },
+    { label: '量子コンピュータによる暗号解読', pct: 58, color: '#3b82f6' },
+    { label: 'サイバー人材の確保困難', pct: 36, color: '#10b981' },
+  ];
+  const container = document.getElementById('riskMeter');
+  container.innerHTML = risks.map(r => `
+    <div class="risk-row">
+      <div class="risk-label">${r.label}</div>
+      <div class="risk-bar-bg">
+        <div class="risk-bar-fill" style="width:0%; background:${r.color};" data-target="${r.pct}"></div>
+      </div>
+      <div class="risk-pct" style="color:${r.color};">${r.pct}%</div>
+    </div>
+  `).join('');
+  setTimeout(() => {
+    document.querySelectorAll('.risk-bar-fill').forEach(bar => {
+      bar.style.width = bar.dataset.target + '%';
+    });
+  }, 200);
+}
+
+// Security: Regulation Chart
+function initRegulationChart() {
+  destroyChart('regulationChart');
+  const ctx = document.getElementById('regulationChart').getContext('2d');
+  chartInstances['regulationChart'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['EU', 'カザフスタン', '英国', '米国', '日本', '中国', 'オーストラリア'],
+      datasets: [{
+        label: 'AI規制スコア（/14）',
+        data: [13, 11, 8, 7, 9, 10, 8],
+        backgroundColor: ['#0f4c81','#10b981','#f59e0b','#ef4444','#8b5cf6','#f77f00','#00b4d8'],
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, max: 14, ticks: { stepSize: 2 } } }
+    }
+  });
+}
+
+// Security: Threat Chart
+function initThreatChart() {
+  destroyChart('threatChart');
+  const ctx = document.getElementById('threatChart').getContext('2d');
+  chartInstances['threatChart'] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['2022', '2023', '2024', '2025', '2026'],
+      datasets: [{
+        label: 'AI関連不正活動指数（2022年=100）',
+        data: [100, 180, 320, 580, 1600],
+        borderColor: '#ef4444',
+        backgroundColor: 'rgba(239,68,68,0.1)',
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: '#ef4444',
+        pointRadius: 5,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => v } } }
+    }
+  });
+}
+
+// ===== INIT =====
+window.addEventListener('DOMContentLoaded', () => {
+  initChartsForSection('overview');
+  setTimeout(triggerFadeIn, 300);
+});
+</script>
+</body>
+</html>
