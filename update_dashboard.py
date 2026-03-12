@@ -1,6 +1,5 @@
 import os
 import json
-import re
 from datetime import datetime
 
 def create_news_item_html(news_list):
@@ -25,8 +24,8 @@ def main():
     with open("/home/ubuntu/ai-news-daily-repo/news_data.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    # テンプレートの読み込み
-    with open("/home/ubuntu/ai-news-daily-repo/template.html", "r", encoding="utf-8") as f:
+    # テンプレートの読み込み（元のデザインを保持）
+    with open("/home/ubuntu/ai-news-daily-repo/template_original.html", "r", encoding="utf-8") as f:
         template = f.read()
 
     # 置換用辞書の作成
@@ -64,12 +63,16 @@ def main():
         "metric_3_change_icon": data["metrics"][2]["change_icon"],
         "metric_3_change_value": data["metrics"][2]["change_value"],
         
+        "risk_1_label": data["risks"][0]["label"],
         "risk_1_pct": str(data["risks"][0]["pct"]),
         "risk_1_color": data["risks"][0]["color"],
+        "risk_2_label": data["risks"][1]["label"],
         "risk_2_pct": str(data["risks"][1]["pct"]),
         "risk_2_color": data["risks"][1]["color"],
+        "risk_3_label": data["risks"][2]["label"],
         "risk_3_pct": str(data["risks"][2]["pct"]),
         "risk_3_color": data["risks"][2]["color"],
+        "risk_4_label": data["risks"][3]["label"],
         "risk_4_pct": str(data["risks"][3]["pct"]),
         "risk_4_color": data["risks"][3]["color"],
         
