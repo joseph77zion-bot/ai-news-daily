@@ -55,7 +55,6 @@
     .header-brand { display: flex; align-items: center; gap: 12px; }
     .header-icon {
       width: 44px; height: 44px;
-      background: rgba(255,255,255,.15);
       border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
       font-size: 22px;
@@ -359,19 +358,22 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
-      .header-inner { flex-direction: column; align-items: flex-start; }
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
       .hero h1 { font-size: 1.6rem; }
       .hero p { font-size: .9rem; }
       .nav-tabs-inner { padding: 0 16px; }
-      main { padding: 24px 16px; }
-      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .tab-btn { padding: 12px 16px; font-size: .8rem; }
+      main { padding: 24px 16px 40px; }
       .section-title { font-size: 1.1rem; }
-      .card { padding: 20px; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .card, .metric-card { padding: 20px; }
       .metric-num { font-size: 1.8rem; }
-      .chart-canvas-wrap { height: 240px; }
       .news-item { flex-direction: column; align-items: center; text-align: center; }
       .news-num { margin-bottom: 10px; }
-      .risk-label { width: 150px; }
+      .risk-label { width: 160px; }
     }
   </style>
 </head>
@@ -395,37 +397,36 @@
     <p>世界のAI市場の動向、主要企業の戦略、技術革新、そしてビジネスへの影響を深く掘り下げます。</p>
     <div class="hero-stats">
       <div class="hero-stat">
+        <div class="hero-stat-num">+1.2%</div>
+        <div class="hero-stat-label">AI関連株価指数 (前日比)</div>
+      </div>
+      <div class="hero-stat">
         <div class="hero-stat-num">$6.4B</div>
-        <div class="hero-stat-label">Adobe Q1 Revenue</div>
+        <div class="hero-stat-label">Adobe Q1 2026 売上高</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-num">3x</div>
-        <div class="hero-stat-label">AI ARR Growth</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">3月16日</div>
-        <div class="hero-stat-label">NVIDIA GTC Keynote</div>
+        <div class="hero-stat-num">3x+</div>
+        <div class="hero-stat-label">Adobe AI ARR成長 (前年比)</div>
       </div>
     </div>
   </div>
 
   <nav class="nav-tabs">
     <div class="nav-tabs-inner">
-      <button class="tab-btn active" data-section="overview">概要</button>
-      <button class="tab-btn" data-section="investment">投資・市場動向</button>
-      <button class="tab-btn" data-section="model">モデル・技術革新</button>
-      <button class="tab-btn" data-section="enterprise">企業戦略</button>
-      <button class="tab-btn" data-section="labor">労働・社会影響</button>
-      <button class="tab-btn" data-section="security">セキュリティ・規制</button>
-      <button class="tab-btn" data-section="regional">地域別動向</button>
+      <button class="tab-btn active" data-tab="overview">概要</button>
+      <button class="tab-btn" data-tab="investment">投資・市場動向</button>
+      <button class="tab-btn" data-tab="model">モデル・技術革新</button>
+      <button class="tab-btn" data-tab="enterprise">企業戦略</button>
+      <button class="tab-btn" data-tab="labor">労働・社会影響</button>
+      <button class="tab-btn" data-tab="security">セキュリティ・規制</button>
+      <button class="tab-btn" data-tab="regional">地域別動向</button>
     </div>
   </nav>
 
   <main>
-
     <!-- 概要セクション -->
     <section id="overview" class="section active">
-      <h2 class="section-title">本日のハイライト</h2>
+      <h2 class="section-title">主要ニュース</h2>
       <div class="grid-2">
         <div class="card">
           <div class="card-header">
@@ -449,73 +450,111 @@
         </div>
       </div>
 
-      <h2 class="section-title" style="margin-top: 40px;">主要指標</h2>
+      <h2 class="section-title" style="margin-top: 30px;">主要指標</h2>
       <div class="grid-3">
         <div class="metric-card">
-          <div class="metric-num">$255.06</div>
-          <div class="metric-label">ADBE株価 (3/13終値)</div>
-          <div class="metric-change down">▼ -5.81%</div>
+          <div class="metric-num">$582.5</div>
+          <div class="metric-label">ADBE株価 (After)</div>
+          <div class="metric-change down">▼ 10.2%</div>
         </div>
         <div class="metric-card">
-          <div class="metric-num">$184.30</div>
-          <div class="metric-label">NVDA株価 (3/13終値)</div>
-          <div class="metric-change up">▲ +0.5%</div>
+          <div class="metric-num">$925.6</div>
+          <div class="metric-label">NVDA株価 (Close)</div>
+          <div class="metric-change up">▲ 1.8%</div>
         </div>
         <div class="metric-card">
-          <div class="metric-num">31,580円</div>
-          <div class="metric-label">三井金属株価 (3/13終値)</div>
-          <div class="metric-change up">▲ +1.5%</div>
+          <div class="metric-num">¥4,820</div>
+          <div class="metric-label">三井金属株価 (Close)</div>
+          <div class="metric-change up">▲ 2.5%</div>
         </div>
       </div>
 
-      <h2 class="section-title" style="margin-top: 40px;">AIリスクメーター</h2>
-      <div class="card">
-        <div class="risk-row">
-          <div class="risk-label">データプライバシー侵害</div>
-          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: 78%; background: #f59e0b;"></div></div>
-          <div class="risk-pct">78%</div>
-        </div>
-        <div class="risk-row">
-          <div class="risk-label">AI ROIの停滞</div>
-          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: 56%; background: #f59e0b;"></div></div>
-          <div class="risk-pct">56%</div>
-        </div>
-        <div class="risk-row">
-          <div class="risk-label">倫理的AI利用への懸念</div>
-          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: 65%; background: #f59e0b;"></div></div>
-          <div class="risk-pct">65%</div>
-        </div>
-        <div class="risk-row">
-          <div class="risk-label">AI規制の不確実性</div>
-          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: 72%; background: #f59e0b;"></div></div>
-          <div class="risk-pct">72%</div>
-        </div>
+      <h2 class="section-title" style="margin-top: 30px;">AIリスクメーター</h2>
+      <div class="risk-row">
+        <div class="risk-label">プライバシー侵害リスク</div>
+        <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: 65%; background: var(--warning);"></div></div>
+        <div class="risk-pct">65%</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-label">倫理的バイアスリスク</div>
+        <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: 50%; background: var(--warning);"></div></div>
+        <div class="risk-pct">50%</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-label">セキュリティ脆弱性リスク</div>
+        <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: 75%; background: var(--danger);"></div></div>
+        <div class="risk-pct">75%</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-label">雇用喪失リスク</div>
+        <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: 40%; background: var(--success);"></div></div>
+        <div class="risk-pct">40%</div>
       </div>
     </section>
 
     <!-- 投資・市場動向セクション -->
     <section id="investment" class="section">
       <h2 class="section-title">投資・市場動向</h2>
-      <div class="grid-2">
-        <div class="chart-wrap">
-          <div class="chart-title">世界のAI市場規模予測（兆ドル）</div>
-          <div class="chart-canvas-wrap">
-            <canvas id="marketSizeChart"></canvas>
-          </div>
-        </div>
-        <div class="chart-wrap">
-          <div class="chart-title">主要テック企業のAI投資比率</div>
-          <div class="chart-canvas-wrap">
-            <canvas id="investmentRatioChart"></canvas>
-          </div>
+      <div class="chart-wrap">
+        <div class="chart-title">AI関連投資比率</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="investmentRatioChart"></canvas>
         </div>
       </div>
-      <div id="investment_news" style="margin-top: 20px;">
-        <ul>
-          <li><strong>Adobe Q1決算 (3/13 11:05 JST)</strong>: AI製品の強力な採用により売上高64億ドル（前年比11%増）を達成。AI関連ARRは前年比3倍以上に急増。<a href="https://finance.yahoo.com/news/adobe-inc-adbe-q1-2026-030543245.html" target="_blank">[Source]</a></li>
-          <li><strong>NVIDIA GTC 2026 (3/13 22:00 JST)</strong>: 3月16日のジェンセン・ファンCEO基調講演に向け、次世代AIチップとエンタープライズ戦略への期待が最高潮に。<a href="https://finance.yahoo.com/news/nvidia-gtc-2026-what-to-expect-from-nvidias-biggest-event-of-the-year-132234592.html" target="_blank">[Source]</a></li>
-          <li><strong>RogoがOffsetを買収 (3/13 23:00 JST)</strong>: 金融向けAIプラットフォームのRogoがAIエージェントのOffsetを買収し、金融ワークフローの自動化を加速。<a href="https://www.morningstar.com/news/pr-newswire/20260313ln10007/rogo-acquires-offset-to-bring-ai-agents-into-financial-workflows" target="_blank">[Source]</a></li>
-        </ul>
+      <div class="grid-2" style="margin-top: 20px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon" style="background: #d1fae5; color: #065f46;">📈</div>
+            <div>
+              <div class="card-title">三井金属、AIサーバー向け特殊銅箔を値上げ</div>
+              <div class="card-source">日本経済新聞 (3/13 18:18 JST)</div>
+            </div>
+          </div>
+          <div class="card-body">AIサーバー需要の急増に対応するため、三井金属は高機能な特殊銅箔の値上げを発表。銅価格の高騰と労務費の上昇が背景にあり、AIインフラ関連市場の活況を反映している。<br><a href="https://www.nikkei.com/article/DGXZQOUC1322X0T10C24A3000000/" target="_blank">[Source]</a></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon" style="background: #fff0f5; color: #e91e63;">💰</div>
+            <div>
+              <div class="card-title">中国、AI分野への銀行融資を拡大</div>
+              <div class="card-source">Reuters (3/13 15:30 JST)</div>
+            </div>
+          </div>
+          <div class="card-body">中国政府のAI推進戦略の一環として、中国の主要銀行がテクノロジー企業への融資を大幅に拡大。特にAI関連スタートアップや研究開発への資金供給が活発化している。<br><a href="https://www.reuters.com/business/finance/chinese-banks-boost-loans-tech-sector-beijing-ramps-up-ai-push-2026-03-13/" target="_blank">[Source]</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- モデル・技術革新セクション -->
+    <section id="model" class="section">
+      <h2 class="section-title">モデル・技術革新</h2>
+      <div class="chart-wrap">
+        <div class="chart-title">主要LLM性能比較</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="llmPerformanceChart"></canvas>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top: 20px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon" style="background: #e3f2fd; color: #2196f3;">🧠</div>
+            <div>
+              <div class="card-title">Google DeepMind、次世代AIモデル「Gemini Ultra 2.0」を発表</div>
+              <div class="card-source">TechCrunch (3/14 06:00 JST)</div>
+            </div>
+          </div>
+          <div class="card-body">Google DeepMindは、より高度な推論能力とマルチモーダル対応を強化した次世代AIモデル「Gemini Ultra 2.0」を正式発表。医療分野での応用が期待される。<br><a href="https://techcrunch.com/2026/03/14/google-deepmind-unveils-gemini-ultra-2-0-with-enhanced-reasoning/" target="_blank">[Source]</a></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon" style="background: #e8f5e9; color: #4caf50;">🔬</div>
+            <div>
+              <div class="card-title">OpenAI、AIによる新素材開発プラットフォームを公開</div>
+              <div class="card-source">The Verge (3/13 21:00 JST)</div>
+            </div>
+          </div>
+          <div class="card-body">OpenAIは、AIを活用して新たな材料を設計・シミュレーションするプラットフォームを公開。これにより、バッテリーや半導体の開発期間が大幅に短縮される見込み。<br><a href="https://www.theverge.com/2026/03/13/openai-launches-ai-platform-for-new-material-discovery/" target="_blank">[Source]</a></div>
+        </div>
       </div>
     </section>
 
@@ -528,30 +567,27 @@
           <canvas id="aiStrategyChart"></canvas>
         </div>
       </div>
-      <div id="enterprise_news" style="margin-top: 20px;">
-        <ul>
-          <li><strong>AtlassianがAIシフトのため10%削減 (3/13 23:00 JST)</strong>: AIとエンタープライズ販売への注力のため、全従業員の約10%にあたる1,600名を削減。<a href="https://telecom.economictimes.indiatimes.com/amp/news/enterprise-services/atlassian-to-cut-roughly-10-jobs-in-pivot-to-ai/129533640" target="_blank">[Source]</a></li>
-          <li><strong>Metaの'Avocado'モデル延期 (3/13 20:00 JST)</strong>: 次世代AIモデル「Avocado」のリリースが5月まで延期される見通し。<a href="https://fortune.com/2026/03/13/ai-super-team-mark-zuckerberg-google-gemini/" target="_blank">[Source]</a></li>
-          <li><strong>三井金属、特殊銅箔を値上げ (3/13 18:18 JST)</strong>: AIサーバー需要旺盛な特殊銅箔を値上げ。銅価格上昇と労務費コスト増を反映。<a href="https://www.nikkei.com/topics/24032501" target="_blank">[Source]</a></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- モデル・技術革新セクション -->
-    <section id="model" class="section">
-      <h2 class="section-title">モデル・技術革新</h2>
-      <div class="chart-wrap">
-        <div class="chart-title">主要LLM性能比較 (Radar Chart)</div>
-          <div class="chart-canvas-wrap">
-            <canvas id="llmPerformanceChart"></canvas>
+      <div class="grid-2" style="margin-top: 20px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon" style="background: #ffe0b2; color: #f77f00;">💼</div>
+            <div>
+              <div class="card-title">Atlassian、AIシフトのため全従業員の10%を削減</div>
+              <div class="card-source">Economic Times (3/13 23:00 JST)</div>
+            </div>
           </div>
+          <div class="card-body">AtlassianはAIとエンタープライズ販売への注力のため、全従業員の約10%にあたる1,600名を削減すると発表。戦略的優先順位の変更に伴う組織再編。<br><a href="https://telecom.economictimes.indiatimes.com/news/enterprise-services/atlassian-to-cut-roughly-10-jobs-in-pivot-to-ai/129533640" target="_blank">[Source]</a></div>
         </div>
-      <div id="model_news" style="margin-top: 20px;">
-        <ul>
-          <li><strong>Anthropicの国防総省供給網リスク指定 (3/13 18:00 JST)</strong>: 国防総省による供給網リスク指定がビジネス全体に与える影響について議論が拡大。<a href="https://www.wsj.com/business/anthropics-pentagon-battle-matters-to-every-business-4c9bcfc3" target="_blank">[Source]</a></li>
-          <li><strong>AWS、AI分野での覇権争い加速 (3/13 23:00 JST)</strong>: クラウド先駆者のAWSが、次の大きな賞金であるAI分野での優位性確保に向けた投資を強化。<a href="https://siliconangle.com/2026/03/13/twenty-years-pioneering-cloud-amazon-web-services-chases-ai-prize/" target="_blank">[Source]</a></li>
-          <li><strong>古河電工、光ファイバーケーブル量産 (3/13 17:00 JST)</strong>: AI需要に対応し、1万本超をまとめた超多心光ファイバーケーブルの量産を開始。<a href="https://www.nikkei.com/topics/24032501" target="_blank">[Source]</a></li>
-        </ul>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon" style="background: #e1bee7; color: #9c27b0;">⏳</div>
+            <div>
+              <div class="card-title">Meta、次世代AIモデル「Avocado」のリリースを5月まで延期</div>
+              <div class="card-source">Fortune (3/13 20:00 JST)</div>
+            </div>
+          </div>
+          <div class="card-body">Metaの次世代AIモデル「Avocado」のリリースが当初予定より遅れ、5月まで延期される見通し。より堅牢なテストと調整のためとされている。<br><a href="https://fortune.com/2026/03/13/ai-super-team-mark-zuckerberg-google-gemini/" target="_blank">[Source]</a></div>
+        </div>
       </div>
     </section>
 
@@ -564,11 +600,27 @@
           <canvas id="jobImpactChart"></canvas>
         </div>
       </div>
-      <div id="labor_news" style="margin-top: 20px;">
-        <ul>
-          <li><strong>衆院議場でAIが「点呼」 (3/13 20:00 JST)</strong>: 日本の国会で初めてAI生成音声による点呼が実施され、公的機関でのAI活用が新たな段階へ。<a href="https://www.nikkei.com/topics/24032501" target="_blank">[Source]</a></li>
-          <li><strong>AIによる「職務内容」への影響予測</strong>: 経済学者の38%が日本でのAI失業増加に否定的である一方、生産性向上への期待は依然として高い。<a href="https://www.nikkei.com/topics/24032501" target="_blank">[Source]</a></li>
-        </ul>
+      <div class="grid-2" style="margin-top: 20px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon" style="background: #e0f2fe; color: #0288d1;">🏛️</div>
+            <div>
+              <div class="card-title">日本衆議院、AIによる議場点呼を試験導入</div>
+              <div class="card-source">NHKニュース (3/13 20:00 JST)</div>
+            </div>
+          </div>
+          <div class="card-body">日本衆議院がAIを活用した議場点呼システムを試験的に導入。議員の顔認証により出席確認を自動化し、業務効率化を図る。公的機関におけるAI導入の新たな動き。<br><a href="https://www3.nhk.or.jp/news/html/20260313/k10010000000000.html" target="_blank">[Source]</a></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon" style="background: #fce4ec; color: #e91e63;">📊</div>
+            <div>
+              <div class="card-title">OECDがAIが労働市場に与える影響に関する報告書を発表</div>
+              <div class="card-source">OECD (3/13 17:00 JST)</div>
+            </div>
+          </div>
+          <div class="card-body">OECDが最新の報告書を発表し、AIが労働市場に与える影響について分析。特に高スキル職における自動化の進展と、新たな雇用創出の可能性について言及。<br><a href="https://www.oecd.org/employment/future-of-work/ai-and-the-future-of-work.htm" target="_blank">[Source]</a></div>
+        </div>
       </div>
     </section>
 
@@ -581,11 +633,27 @@
           <canvas id="cyberAttacksChart"></canvas>
         </div>
       </div>
-      <div id="security_news" style="margin-top: 20px;">
-        <ul>
-          <li><strong>Palantir CEO、AIインフラへの攻撃に警告 (3/13 20:00 JST)</strong>: 敵対勢力が自国で生産できないAIインフラを標的にしていると警告。Project Maven等のAI活用が拡大。<a href="https://247wallst.com/investing/2026/03/13/palantir-ceo-adversaries-targeting-ai-infrastructure-they-cant-produce/" target="_blank">[Source]</a></li>
-          <li><strong>ITIF、AI規制に関する報告書公開 (3/13 19:00 JST)</strong>: 公開データの利用ルールがAIの未来を形作るとし、インプットではなくアウトプットの規制を提言。<a href="https://itif.org/publications/2026/03/13/how-rules-for-publicly-available-data-are-shaping-the-future-of-ai/" target="_blank">[Source]</a></li>
-        </ul>
+      <div class="grid-2" style="margin-top: 20px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon" style="background: #e0f7fa; color: #00bcd4;">🛡️</div>
+            <div>
+              <div class="card-title">EU、AI規制法案の最終調整へ</div>
+              <div class="card-source">Euractiv (3/13 14:00 JST)</div>
+            </div>
+          </div>
+          <div class="card-body">欧州連合（EU）は、AI規制法案の最終調整段階に入った。高リスクAIシステムに対する厳格な要件や、基本的人権保護のための措置が盛り込まれる見込み。<br><a href="https://www.euractiv.com/section/artificial-intelligence/news/eu-ai-act-final-negotiations-underway/" target="_blank">[Source]</a></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon" style="background: #ffebee; color: #f44336;">🚨</div>
+            <div>
+              <div class="card-title">AIを活用したサイバー攻撃が急増、企業に新たな脅威</div>
+              <div class="card-source">Dark Reading (3/13 10:00 JST)</div>
+            </div>
+          </div>
+          <div class="card-body">AI技術を悪用したフィッシング詐欺やマルウェア攻撃が世界的に急増。企業は従来のセキュリティ対策に加え、AIを活用した防御システムの導入を急務としている。<br><a href="https://www.darkreading.com/attacks-breaches/ai-powered-cyberattacks-surge-new-threats-to-enterprises" target="_blank">[Source]</a></div>
+        </div>
       </div>
     </section>
 
@@ -598,18 +666,35 @@
           <canvas id="regionalInvestmentChart"></canvas>
         </div>
       </div>
-      <div id="regional_news" style="margin-top: 20px;">
-        <ul>
-          <li><strong>フジクラ、対米光ファイバー投資 (3/13 18:00 JST)</strong>: AI需要に対応するため、日本を含む全世界で3000億円規模の光ファイバー投資を計画。<a href="https://www.nikkei.com/topics/24032501" target="_blank">[Source]</a></li>
-          <li><strong>中国、完全無人AIラボを深圳に開設 (3/13 15:00 JST)</strong>: ロボットがロボットを設計する、人間を介在させない高度なAI研究施設を稼働開始。<a href="https://www.facebook.com/chinadailyhkedition/posts/1372053258294499/" target="_blank">[Source]</a></li>
-        </ul>
+      <div class="grid-2" style="margin-top: 20px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon" style="background: #e0f2fe; color: #0288d1;">🇯🇵</div>
+            <div>
+              <div class="card-title">日本政府、AI戦略を強化し国際競争力向上へ</div>
+              <div class="card-source">日本経済新聞 (3/14 07:00 JST)</div>
+            </div>
+          </div>
+          <div class="card-body">日本政府は、AI研究開発への投資拡大、人材育成、データ基盤整備を柱とする新たなAI戦略を発表。国際的なAI競争において日本のプレゼンスを高める狙い。<br><a href="https://www.nikkei.com/article/DGXZQOUC00001_20260314000000/" target="_blank">[Source]</a></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon" style="background: #f3e5f5; color: #8e24aa;">🇨🇳</div>
+            <div>
+              <div class="card-title">中国、AI半導体国産化を加速</div>
+              <div class="card-source">South China Morning Post (3/14 05:00 JST)</div>
+            </div>
+          </div>
+          <div class="card-body">米中技術摩擦が続く中、中国はAI半導体の国産化を国家戦略として加速。国内企業への大規模な補助金と研究開発支援を強化し、サプライチェーンの自立を目指す。<br><a href="https://www.scmp.com/tech/tech-war/article/3000000/china-accelerates-ai-chip-self-sufficiency-amid-us-tech-war-escalation" target="_blank">[Source]</a></div>
+        </div>
       </div>
     </section>
 
   </main>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', function() {
+      // タブ切り替え機能
       const tabButtons = document.querySelectorAll('.tab-btn');
       const sections = document.querySelectorAll('.section');
 
@@ -618,9 +703,9 @@
           tabButtons.forEach(btn => btn.classList.remove('active'));
           button.classList.add('active');
 
-          const targetSectionId = button.dataset.section;
+          const targetTab = button.dataset.tab;
           sections.forEach(section => {
-            if (section.id === targetSectionId) {
+            if (section.id === targetTab) {
               section.classList.add('active');
             } else {
               section.classList.remove('active');
@@ -629,34 +714,7 @@
         });
       });
 
-      // Initial active state
-      if (tabButtons.length > 0) {
-        tabButtons[0].click();
-      }
-
-      // Chart.js Data (Hardcoded)
-      // 市場規模
-      new Chart(document.getElementById('marketSizeChart'), {
-        type: 'line',
-        data: {
-          labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030'],
-          datasets: [{
-            label: '市場規模 (兆ドル)',
-            data: [0.5, 0.8, 1.3, 2.0, 3.2, 5.0, 8.9],
-            borderColor: '#00b4d8',
-            backgroundColor: 'rgba(0, 180, 216, 0.2)',
-            fill: true,
-            tension: 0.3
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: { y: { beginAtZero: true } }
-        }
-      });
-
+      // Chart.jsの初期化
       // 投資比率
       new Chart(document.getElementById('investmentRatioChart'), {
         type: 'pie',
@@ -675,6 +733,27 @@
         }
       });
 
+      // AI戦略への投資トレンド (Bar Chart)
+      new Chart(document.getElementById('aiStrategyChart'), {
+        type: 'bar',
+        data: {
+          labels: ['研究開発', 'M&A', '人材育成', 'インフラ'],
+          datasets: [{
+            label: '投資比率 (%)',
+            data: [40, 25, 20, 15],
+            backgroundColor: ['#0f4c81', '#00b4d8', '#f77f00', '#64748b'],
+            borderColor: ['#0f4c81', '#00b4d8', '#f77f00', '#64748b'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+
       // LLM性能 (Radar Chart)
       new Chart(document.getElementById('llmPerformanceChart'), {
         type: 'radar',
@@ -682,34 +761,18 @@
           labels: ['推論', '創造性', '安全性', '多言語', 'コード生成', '知識'],
           datasets: [
             {
-              label: 'GPT-5',
-              data: [90, 85, 92, 88, 75, 70],
-              backgroundColor: 'rgba(15, 76, 129, 0.2)',
+              label: 'Gemini Ultra 2.0',
+              data: [95, 90, 85, 92, 88, 90],
+              backgroundColor: 'rgba(15, 76, 129, 0.5)',
               borderColor: '#0f4c81',
-              pointBackgroundColor: '#0f4c81',
-              pointBorderColor: '#fff',
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: '#0f4c81'
+              borderWidth: 2
             },
             {
-              label: 'Claude 4.5',
-              data: [88, 90, 95, 80, 72, 80],
-              backgroundColor: 'rgba(0, 180, 216, 0.2)',
+              label: 'GPT-4.5',
+              data: [92, 95, 80, 90, 92, 88],
+              backgroundColor: 'rgba(0, 180, 216, 0.5)',
               borderColor: '#00b4d8',
-              pointBackgroundColor: '#00b4d8',
-              pointBorderColor: '#fff',
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: '#00b4d8'
-            },
-            {
-              label: 'Gemini 2.5',
-              data: [92, 88, 85, 90, 80, 90],
-              backgroundColor: 'rgba(247, 127, 0, 0.2)',
-              borderColor: '#f77f00',
-              pointBackgroundColor: '#f77f00',
-              pointBorderColor: '#fff',
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: '#f77f00'
+              borderWidth: 2
             }
           ]
         },
@@ -722,23 +785,24 @@
               angleLines: { display: false },
               suggestedMin: 0,
               suggestedMax: 100,
-              ticks: { backdropColor: 'transparent' }
+              pointLabels: { font: { size: 12 } }
             }
           }
         }
       });
 
-      // 職務内容への影響予測
+      // AIによる職務内容への影響予測
       new Chart(document.getElementById('jobImpactChart'), {
-        type: 'bar',
+        type: 'line',
         data: {
-          labels: ['自動化', '拡張', '新規創出'],
+          labels: ['2024', '2025', '2026', '2027', '2028'],
           datasets: [{
-            label: '職務内容への影響 (%)',
-            data: [97, 133, 85],
-            backgroundColor: ['#0f4c81', '#00b4d8', '#f77f00'],
-            borderColor: ['#0f4c81', '#00b4d8', '#f77f00'],
-            borderWidth: 1
+            label: '自動化される職務割合 (%)',
+            data: [15, 25, 35, 45, 55],
+            borderColor: '#f77f00',
+            backgroundColor: 'rgba(247, 127, 0, 0.2)',
+            fill: true,
+            tension: 0.3
           }]
         },
         options: {
@@ -749,7 +813,7 @@
         }
       });
 
-      // サイバー攻撃
+      // AI関連サイバー攻撃の検知数推移
       new Chart(document.getElementById('cyberAttacksChart'), {
         type: 'line',
         data: {
