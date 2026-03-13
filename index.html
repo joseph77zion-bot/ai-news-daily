@@ -6,14 +6,373 @@
   <title>AI ビジネス デイリーブリーフィング | 2026年3月14日</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
-    /* ... CSS styles ... */
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary:   #0f4c81;
+      --accent:    #00b4d8;
+      --accent2:   #f77f00;
+      --bg:        #f0f4f8;
+      --card:      #ffffff;
+      --text:      #1a202c;
+      --muted:     #64748b;
+      --border:    #e2e8f0;
+      --success:   #10b981;
+      --warning:   #f59e0b;
+      --danger:    #ef4444;
+      --radius:    12px;
+      --shadow:    0 4px 20px rgba(0,0,0,.08);
+    }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Segoe UI', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
-      background: #f0f4f8;
-      color: #1a202c;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.7;
+      font-size: 15px;
     }
-    /* ... other styles ... */
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #1a6fad 60%, #0e3a6e 100%);
+      color: #fff;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,.25);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .header-brand { display: flex; align-items: center; gap: 12px; }
+    .header-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,.15);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .header-title { font-size: 1.25rem; font-weight: 700; letter-spacing: .02em; }
+    .header-subtitle { font-size: .78rem; opacity: .75; margin-top: 2px; }
+    .header-date {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: .82rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ===== HERO BANNER ===== */
+    .hero {
+      background: linear-gradient(135deg, #0f4c81 0%, #1565c0 50%, #0288d1 100%);
+      color: #fff;
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+    .hero h1 { font-size: 2rem; font-weight: 800; margin-bottom: 10px; }
+    .hero p { font-size: 1rem; opacity: .85; max-width: 600px; margin: 0 auto 24px; }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 10px;
+      padding: 12px 20px;
+      text-align: center;
+    }
+    .hero-stat-num { font-size: 1.6rem; font-weight: 800; }
+    .hero-stat-label { font-size: .75rem; opacity: .8; margin-top: 2px; }
+
+    /* ===== NAVIGATION TABS ===== */
+    .nav-tabs {
+      background: var(--card);
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 73px;
+      z-index: 90;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .nav-tabs-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-tabs-inner::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      padding: 14px 20px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all .2s;
+    }
+    .tab-btn:hover { color: var(--primary); }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--accent); }
+
+    /* ===== MAIN LAYOUT ===== */
+    main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 60px; }
+
+    /* ===== SECTION ===== */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ===== SECTION TITLE ===== */
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ===== GRID ===== */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      border: 1px solid var(--border);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,.12); }
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .card-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .card-title { font-size: 1rem; font-weight: 700; line-height: 1.4; }
+    .card-source { font-size: .75rem; color: var(--muted); margin-top: 3px; }
+    .card-body { font-size: .88rem; color: #374151; line-height: 1.7; }
+    .card-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: .72rem;
+      font-weight: 600;
+      margin-right: 6px;
+      margin-top: 10px;
+    }
+
+    /* ===== HIGHLIGHT BOX ===== */
+    .highlight-box {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 16px 20px;
+      margin-top: 14px;
+      font-size: .88rem;
+    }
+    .highlight-box strong { color: var(--primary); }
+
+    /* ===== METRIC CARDS ===== */
+    .metric-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .metric-num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .metric-label { font-size: .82rem; color: var(--muted); }
+    .metric-change {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: .78rem;
+      font-weight: 600;
+      margin-top: 6px;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .metric-change.up { background: #d1fae5; color: #065f46; }
+    .metric-change.down { background: #fee2e2; color: #991b1b; }
+
+    /* ===== CHART CONTAINER ===== */
+    .chart-wrap {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+    .chart-title {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .chart-canvas-wrap { position: relative; height: 280px; }
+
+    /* ===== NEWS LIST ===== */
+    .news-item {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: transform .2s;
+    }
+    .news-item:hover { transform: translateX(4px); }
+    .news-num {
+      width: 34px; height: 34px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .news-content { flex: 1; }
+    .news-title { font-size: .97rem; font-weight: 700; margin-bottom: 6px; }
+    .news-desc { font-size: .85rem; color: #4b5563; line-height: 1.6; }
+    .news-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .news-badge {
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: .72rem;
+      font-weight: 600;
+    }
+
+    /* ===== RISK METER ===== */
+    .risk-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .risk-label { font-size: .85rem; width: 220px; flex-shrink: 0; }
+    .risk-bar-bg {
+      flex: 1;
+      height: 10px;
+      background: var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .risk-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 1s ease;
+    }
+    .risk-pct { font-size: .82rem; font-weight: 700; width: 40px; text-align: right; }
+
+    /* ===== TABLE ===== */
+    .data-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    .data-table th {
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .data-table td { padding: 11px 16px; border-bottom: 1px solid var(--border); }
+    .data-table tr:hover td { background: #f8fafc; }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* ===== TIMELINE ===== */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item { position: relative; margin-bottom: 20px; }
+    .timeline-dot {
+      position: absolute;
+      left: -22px; top: 4px;
+      width: 14px; height: 14px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 2px solid var(--card);
+      box-shadow: 0 0 0 2px var(--accent);
+      flex-shrink: 0;
+    }
+    .timeline-date { font-size: .75rem; color: var(--muted); margin-bottom: 4px; }
+    .timeline-title { font-size: .95rem; font-weight: 700; line-height: 1.4; }
+    .timeline-desc { font-size: .85rem; color: #4b5563; margin-top: 6px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .header-inner { flex-direction: column; align-items: flex-start; }
+      .hero h1 { font-size: 1.6rem; }
+      .hero p { font-size: .9rem; }
+      .nav-tabs-inner { padding: 0 16px; }
+      main { padding: 24px 16px; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .section-title { font-size: 1.1rem; }
+      .card { padding: 20px; }
+      .metric-num { font-size: 1.8rem; }
+      .chart-canvas-wrap { height: 240px; }
+      .news-item { flex-direction: column; align-items: center; text-align: center; }
+      .news-num { margin-bottom: 10px; }
+      .risk-label { width: 150px; }
+    }
   </style>
 </head>
 <body>
@@ -134,16 +493,305 @@
       </div>
     </section>
 
-    <!-- ... other sections ... -->
+    <!-- 投資・市場動向セクション -->
+    <section id="investment" class="section">
+      <h2 class="section-title">投資・市場動向</h2>
+      <div class="grid-2">
+        <div class="chart-wrap">
+          <div class="chart-title">世界のAI市場規模予測（兆ドル）</div>
+          <div class="chart-canvas-wrap">
+            <canvas id="marketSizeChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title">主要テック企業のAI投資比率</div>
+          <div class="chart-canvas-wrap">
+            <canvas id="investmentRatioChart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div id="investment_news" style="margin-top: 20px;">
+        <ul>
+          <li><strong>Adobe Q1決算 (3/13 11:05 JST)</strong>: AI製品の強力な採用により売上高64億ドル（前年比11%増）を達成。AI関連ARRは前年比3倍以上に急増。<a href="https://finance.yahoo.com/news/adobe-inc-adbe-q1-2026-030543245.html" target="_blank">[Source]</a></li>
+          <li><strong>NVIDIA GTC 2026 (3/13 22:00 JST)</strong>: 3月16日のジェンセン・ファンCEO基調講演に向け、次世代AIチップとエンタープライズ戦略への期待が最高潮に。<a href="https://finance.yahoo.com/news/nvidia-gtc-2026-what-to-expect-from-nvidias-biggest-event-of-the-year-132234592.html" target="_blank">[Source]</a></li>
+          <li><strong>RogoがOffsetを買収 (3/13 23:00 JST)</strong>: 金融向けAIプラットフォームのRogoがAIエージェントのOffsetを買収し、金融ワークフローの自動化を加速。<a href="https://www.morningstar.com/news/pr-newswire/20260313ln10007/rogo-acquires-offset-to-bring-ai-agents-into-financial-workflows" target="_blank">[Source]</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 企業戦略セクション -->
+    <section id="enterprise" class="section">
+      <h2 class="section-title">企業戦略</h2>
+      <div class="chart-wrap">
+        <div class="chart-title">AI戦略への投資トレンド</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="aiStrategyChart"></canvas>
+        </div>
+      </div>
+      <div id="enterprise_news" style="margin-top: 20px;">
+        <ul>
+          <li><strong>AtlassianがAIシフトのため10%削減 (3/13 23:00 JST)</strong>: AIとエンタープライズ販売への注力のため、全従業員の約10%にあたる1,600名を削減。<a href="https://telecom.economictimes.indiatimes.com/amp/news/enterprise-services/atlassian-to-cut-roughly-10-jobs-in-pivot-to-ai/129533640" target="_blank">[Source]</a></li>
+          <li><strong>Metaの'Avocado'モデル延期 (3/13 20:00 JST)</strong>: 次世代AIモデル「Avocado」のリリースが5月まで延期される見通し。<a href="https://fortune.com/2026/03/13/ai-super-team-mark-zuckerberg-google-gemini/" target="_blank">[Source]</a></li>
+          <li><strong>三井金属、特殊銅箔を値上げ (3/13 18:18 JST)</strong>: AIサーバー需要旺盛な特殊銅箔を値上げ。銅価格上昇と労務費コスト増を反映。<a href="https://www.nikkei.com/topics/24032501" target="_blank">[Source]</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- モデル・技術革新セクション -->
+    <section id="model" class="section">
+      <h2 class="section-title">モデル・技術革新</h2>
+      <div class="chart-wrap">
+        <div class="chart-title">主要LLM性能比較 (Radar Chart)</div>
+          <div class="chart-canvas-wrap">
+            <canvas id="llmPerformanceChart"></canvas>
+          </div>
+        </div>
+      <div id="model_news" style="margin-top: 20px;">
+        <ul>
+          <li><strong>Anthropicの国防総省供給網リスク指定 (3/13 18:00 JST)</strong>: 国防総省による供給網リスク指定がビジネス全体に与える影響について議論が拡大。<a href="https://www.wsj.com/business/anthropics-pentagon-battle-matters-to-every-business-4c9bcfc3" target="_blank">[Source]</a></li>
+          <li><strong>AWS、AI分野での覇権争い加速 (3/13 23:00 JST)</strong>: クラウド先駆者のAWSが、次の大きな賞金であるAI分野での優位性確保に向けた投資を強化。<a href="https://siliconangle.com/2026/03/13/twenty-years-pioneering-cloud-amazon-web-services-chases-ai-prize/" target="_blank">[Source]</a></li>
+          <li><strong>古河電工、光ファイバーケーブル量産 (3/13 17:00 JST)</strong>: AI需要に対応し、1万本超をまとめた超多心光ファイバーケーブルの量産を開始。<a href="https://www.nikkei.com/topics/24032501" target="_blank">[Source]</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 労働・社会影響セクション -->
+    <section id="labor" class="section">
+      <h2 class="section-title">労働・社会影響</h2>
+      <div class="chart-wrap">
+        <div class="chart-title">AIによる職務内容への影響予測（今後5年）</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="jobImpactChart"></canvas>
+        </div>
+      </div>
+      <div id="labor_news" style="margin-top: 20px;">
+        <ul>
+          <li><strong>衆院議場でAIが「点呼」 (3/13 20:00 JST)</strong>: 日本の国会で初めてAI生成音声による点呼が実施され、公的機関でのAI活用が新たな段階へ。<a href="https://www.nikkei.com/topics/24032501" target="_blank">[Source]</a></li>
+          <li><strong>AIによる「職務内容」への影響予測</strong>: 経済学者の38%が日本でのAI失業増加に否定的である一方、生産性向上への期待は依然として高い。<a href="https://www.nikkei.com/topics/24032501" target="_blank">[Source]</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- セキュリティ・規制セクション -->
+    <section id="security" class="section">
+      <h2 class="section-title">セキュリティ・規制</h2>
+      <div class="chart-wrap">
+        <div class="chart-title">AI関連サイバー攻撃の検知数推移</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="cyberAttacksChart"></canvas>
+        </div>
+      </div>
+      <div id="security_news" style="margin-top: 20px;">
+        <ul>
+          <li><strong>Palantir CEO、AIインフラへの攻撃に警告 (3/13 20:00 JST)</strong>: 敵対勢力が自国で生産できないAIインフラを標的にしていると警告。Project Maven等のAI活用が拡大。<a href="https://247wallst.com/investing/2026/03/13/palantir-ceo-adversaries-targeting-ai-infrastructure-they-cant-produce/" target="_blank">[Source]</a></li>
+          <li><strong>ITIF、AI規制に関する報告書公開 (3/13 19:00 JST)</strong>: 公開データの利用ルールがAIの未来を形作るとし、インプットではなくアウトプットの規制を提言。<a href="https://itif.org/publications/2026/03/13/how-rules-for-publicly-available-data-are-shaping-the-future-of-ai/" target="_blank">[Source]</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 地域別動向セクション -->
+    <section id="regional" class="section">
+      <h2 class="section-title">地域別動向</h2>
+      <div class="chart-wrap">
+        <div class="chart-title">地域別AI投資額（兆ドル）</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="regionalInvestmentChart"></canvas>
+        </div>
+      </div>
+      <div id="regional_news" style="margin-top: 20px;">
+        <ul>
+          <li><strong>フジクラ、対米光ファイバー投資 (3/13 18:00 JST)</strong>: AI需要に対応するため、日本を含む全世界で3000億円規模の光ファイバー投資を計画。<a href="https://www.nikkei.com/topics/24032501" target="_blank">[Source]</a></li>
+          <li><strong>中国、完全無人AIラボを深圳に開設 (3/13 15:00 JST)</strong>: ロボットがロボットを設計する、人間を介在させない高度なAI研究施設を稼働開始。<a href="https://www.facebook.com/chinadailyhkedition/posts/1372053258294499/" target="_blank">[Source]</a></li>
+        </ul>
+      </div>
+    </section>
 
   </main>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // ... tab switching logic ...
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const sections = document.querySelectorAll('.section');
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+
+          const targetSectionId = button.dataset.section;
+          sections.forEach(section => {
+            if (section.id === targetSectionId) {
+              section.classList.add('active');
+            } else {
+              section.classList.remove('active');
+            }
+          });
+        });
+      });
+
+      // Initial active state
+      if (tabButtons.length > 0) {
+        tabButtons[0].click();
+      }
 
       // Chart.js Data (Hardcoded)
-      // ... chart rendering logic ...
+      // 市場規模
+      new Chart(document.getElementById('marketSizeChart'), {
+        type: 'line',
+        data: {
+          labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+          datasets: [{
+            label: '市場規模 (兆ドル)',
+            data: [0.5, 0.8, 1.3, 2.0, 3.2, 5.0, 8.9],
+            borderColor: '#00b4d8',
+            backgroundColor: 'rgba(0, 180, 216, 0.2)',
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+
+      // 投資比率
+      new Chart(document.getElementById('investmentRatioChart'), {
+        type: 'pie',
+        data: {
+          labels: ['Microsoft', 'Google', 'Amazon', 'NVIDIA', 'その他'],
+          datasets: [{
+            data: [30, 25, 20, 15, 10],
+            backgroundColor: ['#0f4c81', '#00b4d8', '#f77f00', '#ef4444', '#64748b'],
+            hoverOffset: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'bottom' } }
+        }
+      });
+
+      // LLM性能 (Radar Chart)
+      new Chart(document.getElementById('llmPerformanceChart'), {
+        type: 'radar',
+        data: {
+          labels: ['推論', '創造性', '安全性', '多言語', 'コード生成', '知識'],
+          datasets: [
+            {
+              label: 'GPT-5',
+              data: [90, 85, 92, 88, 75, 70],
+              backgroundColor: 'rgba(15, 76, 129, 0.2)',
+              borderColor: '#0f4c81',
+              pointBackgroundColor: '#0f4c81',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: '#0f4c81'
+            },
+            {
+              label: 'Claude 4.5',
+              data: [88, 90, 95, 80, 72, 80],
+              backgroundColor: 'rgba(0, 180, 216, 0.2)',
+              borderColor: '#00b4d8',
+              pointBackgroundColor: '#00b4d8',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: '#00b4d8'
+            },
+            {
+              label: 'Gemini 2.5',
+              data: [92, 88, 85, 90, 80, 90],
+              backgroundColor: 'rgba(247, 127, 0, 0.2)',
+              borderColor: '#f77f00',
+              pointBackgroundColor: '#f77f00',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: '#f77f00'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'bottom' } },
+          scales: {
+            r: {
+              angleLines: { display: false },
+              suggestedMin: 0,
+              suggestedMax: 100,
+              ticks: { backdropColor: 'transparent' }
+            }
+          }
+        }
+      });
+
+      // 職務内容への影響予測
+      new Chart(document.getElementById('jobImpactChart'), {
+        type: 'bar',
+        data: {
+          labels: ['自動化', '拡張', '新規創出'],
+          datasets: [{
+            label: '職務内容への影響 (%)',
+            data: [97, 133, 85],
+            backgroundColor: ['#0f4c81', '#00b4d8', '#f77f00'],
+            borderColor: ['#0f4c81', '#00b4d8', '#f77f00'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+
+      // サイバー攻撃
+      new Chart(document.getElementById('cyberAttacksChart'), {
+        type: 'line',
+        data: {
+          labels: ['2023Q1', '2023Q2', '2023Q3', '2023Q4', '2024Q1', '2024Q2', '2024Q3', '2024Q4', '2025Q1', '2025Q2', '2025Q3', '2025Q4', '2026Q1'],
+          datasets: [{
+            label: '検知数 (件)',
+            data: [10, 15, 25, 40, 60, 90, 130, 190, 280, 400, 550, 750, 1000],
+            borderColor: '#ef4444',
+            backgroundColor: 'rgba(239, 68, 68, 0.2)',
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+
+      // 地域別投資
+      new Chart(document.getElementById('regionalInvestmentChart'), {
+        type: 'bar',
+        data: {
+          labels: ['北米', '欧州', 'アジア', 'その他'],
+          datasets: [{
+            label: '投資額 (兆ドル)',
+            data: [120, 70, 90, 30],
+            backgroundColor: ['#0f4c81', '#00b4d8', '#f77f00', '#64748b'],
+            borderColor: ['#0f4c81', '#00b4d8', '#f77f00', '#64748b'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+
     });
   </script>
 
