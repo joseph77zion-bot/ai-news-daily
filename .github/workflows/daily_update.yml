@@ -1,0 +1,57 @@
+name: Daily AI News Update
+
+on:
+  schedule:
+    - cron: "0 23 * * *" # 毎日 JST 08:00 (UTC 23:00)
+  workflow_dispatch: # 手動実行用
+
+jobs:
+  update-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Set up Python
+        uses: actions/python-3.10@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 pandas
+
+      - name: Run Update Script with Retry Logic
+        id: update
+        continue-on-error: true
+        run: |
+          # リトライロジックの組み込み (15分おきに最大3回)
+          MAX_RETRIES=3
+          RETRY_COUNT=0
+          SUCCESS=false
+
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            echo "Attempting update (Attempt $((RETRY_COUNT + 1)))..."
+            python update_dashboard_v2.py && SUCCESS=true && break
+            RETRY_COUNT=$((RETRY_COUNT + 1))
+            if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+              echo "Update failed. Retrying in 15 minutes..."
+              sleep 900
+            fi
+          done
+
+          if [ "$SUCCESS" = false ]; then
+            echo "Update failed after $MAX_RETRIES attempts."
+            exit 1
+          fi
+
+      - name: Commit and Push changes
+        if: steps.update.outcome == 'success'
+        run: |
+          git config --global user.name "Manus Bot"
+          git config --global user.email "bot@manus.im"
+          git add index.html
+          git commit -m "[Auto-Update JST 08:00 Success] $(date +'%Y-%m-%d %H:%M:%S')"
+          git push
