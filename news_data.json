@@ -1,68 +1,68 @@
 {
-  "date": "2026年3月12日",
+  "date": "2026年3月17日",
   "hero_stats": {
-    "stat1": {"num": "$650B", "label": "Big Tech AI投資予測 (2026)"},
-    "stat2": {"num": "12%", "label": "AI ROI達成企業比率 (PwC)"},
-    "stat3": {"num": "3.1%", "label": "米雇用成長予測 (2026-2036)"}
+    "stat1": {"num": "4.45兆ドル", "label": "NVIDIA 時価総額"},
+    "stat2": {"num": "1560億元", "label": "Alibaba Cloud 売上予測"},
+    "stat3": {"num": "183.22", "label": "NVIDIA (NVDA)"}
   },
   "overview": [
     {
-      "title": "米大手テック4社、2026年のAI投資額が6500億ドルに達する見通し",
-      "source": "Reuters / Yahoo Finance",
-      "body": "Alphabet、Amazon、Meta、Microsoftの4社は、2026年度に合計で約6350億ドルから6650億ドルをAIインフラとスケーリングに投じる計画。前年比での大幅な増額が続く。"
+      "title": "Accenture & Databricks、企業向けAIエージェント導入で提携",
+      "source": "Accenture Newsroom (2026/03/17)",
+      "body": "AccentureとDatabricksが戦略的提携を発表。企業がデータとAIを活用して、生成AIエージェントを大規模に導入できるよう支援します。この提携は、AI駆動型ビジネス変革を加速させることを目的としています。"
     },
     {
-      "title": "AI ROIの二極化：56%のCEOが「未だ利益なし」と回答",
-      "source": "Forbes / PwC",
-      "body": "PwCやAnthropicの最新レポートによると、CEOの56%がAI投資からの明確なROIを実感できていない一方、先行する12%の企業は生産性と収益で予測を上回る成果を上げている。"
+      "title": "NVIDIA GTC 2026開幕、ジェンセン・ファンCEOが1兆ドル市場予測",
+      "source": "NVIDIA Official (2026/03/17)",
+      "body": "NVIDIAのGTC 2026が本日開幕。ジェンセン・ファンCEOは基調講演で、AI市場が今後数年で1兆ドル規模に達すると予測。次世代AIチップ「Groq 3」やAIエージェント基盤「NemoClaw」を発表し、業界の注目を集めています。"
     }
   ],
   "metrics": [
-    {"num": "$650B", "label": "Big Tech AI投資", "change_class": "up", "change_icon": "▲", "change_value": "+$150B"},
-    {"num": "12%", "label": "AI高収益企業", "change_class": "up", "change_icon": "▲", "change_value": "+4%"},
-    {"num": "3.1%", "label": "雇用成長率予測", "change_class": "down", "change_icon": "▼", "change_value": "-9.9% (10年比)"}
+    {"num": "183.22", "label": "NVIDIA (NVDA)", "change_class": "up", "change_icon": "▲", "change_value": "0.85%"},
+    {"num": "251.86", "label": "Adobe (ADBE)", "change_class": "down", "change_icon": "▼", "change_value": "0.21%"},
+    {"num": "28,045", "label": "古河電工 (5801.T)", "change_class": "up", "change_icon": "▲", "change_value": "1.50%"}
   ],
   "risks": [
-    {"label": "データプライバシー侵害", "pct": 78, "color": "#ef4444"},
-    {"label": "AI ROIの停滞", "pct": 56, "color": "#f77f00"},
-    {"label": "若年層の雇用減少", "pct": 45, "color": "#f77f00"},
-    {"label": "サイバー攻撃の高度化", "pct": 85, "color": "#ef4444"}
+    {"label": "軍事利用の倫理的懸念", "pct": 85, "color": "#ef4444"},
+    {"label": "データセンターへのサイバー攻撃", "pct": 72, "color": "#f59e0b"},
+    {"label": "AIインフラの供給不足", "pct": 60, "color": "#f59e0b"},
+    {"label": "AIモデルの透明性不足", "pct": 55, "color": "#f59e0b"}
   ],
   "categories": {
     "investment": [
-      {"title": "Bridgewater: 2026年はAIインフラ投資のピークに", "description": "大手テック企業によるデータセンターと半導体への投資が加速。2026年は供給網の拡大が最大の焦点となる。", "tags": ["投資", "インフラ", "半導体"]},
-      {"title": "AI関連銘柄、2026年の収益目標を100億ドルに設定", "description": "主要なAIソフトウェア企業が、2026年度の売上高予測を大幅に上方修正。市場の期待が高まっている。", "tags": ["株式", "収益予測"]}
+      {"title": "米株式市場、AI関連株主導で続伸", "description": "MetaやNVIDIAなどのAI関連株が買われ、主要指数が上昇。投資家のAI技術への期待が引き続き市場を牽引しています。", "tags": ["投資", "市場"]}
+    ],
+    "enterprise": [
+      {"title": "Dell、AI導入による10%の人員削減を発表", "description": "Dellは、AIを活用した業務効率化の一環として、全従業員の約10%にあたる13,000人の人員削減計画を発表しました。これは、AIがホワイトカラー職種に与える影響の具体例として注目されています。", "tags": ["企業戦略", "人員削減"]},
+      {"title": "Alibaba Cloud、2026年度売上230億ドルの強気予測", "description": "Alibaba Cloudは、AIサービスの需要拡大を背景に、2026年度の売上高が230億ドル（約1560億元）に達するとの強気な見通しを示しました。生成AIモデル開発者へのインフラ提供が収益を牽引しています。", "tags": ["企業戦略", "クラウド"]}
     ],
     "model": [
-      {"title": "2026年LLM比較：Claude Opus 4.5 vs GPT-5 vs Gemini 2.5", "description": "推論能力ではClaude、コーディングではGPT、エンタープライズ統合ではGeminiが優位に立つ三つ巴の展開。", "tags": ["LLM", "比較", "技術革新"]},
-      {"title": "DeepSeek V3が効率性で市場を席巻", "description": "低コストかつ高性能な推論モデルの登場により、企業のAI導入コストが劇的に低下し始めている。", "tags": ["効率化", "コスト削減"]}
+      {"title": "NVIDIA、AIエージェント基盤「NemoClaw」発表", "description": "NVIDIAはGTC 2026にて、AIエージェントの開発と評価を加速するオープンソース基盤「NemoClaw」を発表。これにより、AIエージェントの設計からデプロイまでのプロセスが大幅に効率化されると期待されています。", "tags": ["技術革新", "NVIDIA"]},
+      {"title": "Groq 3、衝撃の推論速度を達成しNVIDIAに迫る", "description": "AIチップスタートアップGroqが、次世代チップ「Groq 3」でNVIDIAの最新GPUに匹敵する、あるいは一部ベンチマークで上回る推論速度を達成したと発表。AIチップ市場の競争が激化しています。", "tags": ["技術革新", "AIチップ"]}
     ],
     "labor": [
-      {"title": "ハーバード・ビジネス・レビュー：AIによる労働市場の変容", "description": "単純な職務の代替だけでなく、既存の職務内容がAIとの協働を前提としたものへ根本的に変化している。", "tags": ["労働市場", "HBR", "社会影響"]},
-      {"title": "若年層の雇用にAIの影響が顕著に", "description": "Brookings研究所の調査で、AI露出度の高い職種において若年層の採用が減少傾向にあることが判明。", "tags": ["雇用", "若年層"]}
+      {"title": "Dellの大規模削減、ホワイトカラー職種におけるAI置換の現実味", "description": "DellのAI導入に伴う人員削減は、これまで比較的安全とされてきたホワイトカラー職種においてもAIによる自動化・効率化が進み、雇用構造が大きく変化する可能性を示唆しています。", "tags": ["労働市場", "雇用"]}
     ],
     "security": [
-      {"title": "AI関連サイバー攻撃、2026年に過去最高を記録か", "description": "AI生成のフィッシングや自動化された脆弱性攻撃により、企業のセキュリティリスクが急増している。", "tags": ["セキュリティ", "リスク"]},
-      {"title": "EU AI法、2026年からの本格運用に向け最終調整", "description": "高リスクAIシステムの規制と透明性確保に関する具体的なガイドラインが各企業に提示された。", "tags": ["規制", "EU", "ガバナンス"]}
+      {"title": "WWTとCrowdStrike、「Securing AI Lab」を開設", "description": "World Wide Technology (WWT) とCrowdStrikeが共同で「Securing AI Lab」を開設。AIモデルへの攻撃、データ漏洩、悪用を防ぐための新たなセキュリティソリューション開発に注力します。", "tags": ["セキュリティ", "サイバー攻撃"]}
     ],
     "regional": [
-      {"title": "日本政府、公務員向けAI「Gennai」の試験運用を拡大", "description": "行政事務の効率化に向けた日本独自の取り組みが、地方自治体へも波及し始めている。", "tags": ["日本", "行政", "効率化"]},
-      {"title": "シンガポール、NAIS 2.0でアジアのAIハブを堅持", "description": "国家AI戦略の更新により、グローバルなAI人材と企業の誘致をさらに強化する方針。", "tags": ["シンガポール", "アジア"]}
+      {"title": "日本、スタートアップ政策推進分科会でAI戦略を議論", "description": "内閣府のスタートアップ政策推進分科会が開催され、AI技術を活用した産業競争力強化、人材育成、国際連携に関する新たな戦略が議論されました。日本政府はAI分野への投資を加速させる方針です。", "tags": ["日本", "政策"]},
+      {"title": "中国、テックセクターへの融資拡大でAI推進を強化", "description": "中国人民銀行は、国内の主要銀行に対し、AI開発を加速させるためテックセクターへの融資を拡大するよう指示。政府主導でAI産業の育成を強力に推進する姿勢を鮮明にしています。", "tags": ["中国", "政策"]}
     ]
   },
   "charts": {
-    "market_size": {"labels": ["2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"], "values": [0.4, 0.7, 1.1, 1.8, 2.8, 4.2, 6.5, 9.2]},
-    "investment_ratio": {"labels": ["Microsoft", "Google", "Amazon", "Meta", "その他"], "values": [32, 28, 22, 12, 6]},
-    "llm_performance": {
-      "labels": ["推論", "コード", "多言語", "安全", "速度", "コスト"],
+    "stock_price": {"labels": ["3/10", "3/11", "3/12", "3/13", "3/14", "3/15", "3/16", "3/17"], "nvidia_data": [178.50, 179.10, 180.00, 180.25, 181.50, 182.00, 182.80, 183.22], "adobe_data": [250.10, 250.50, 251.00, 251.86, 251.50, 251.70, 251.90, 251.86], "furukawa_data": [27500, 27800, 27900, 28000, 27950, 28000, 28020, 28045]},
+    "ai_strategy": {"labels": ["研究開発", "M&A", "人材育成", "インフラ投資"], "values": [45, 20, 20, 15]},
+    "chip_performance": {
+      "labels": ["推論速度", "学習効率", "電力効率", "柔軟性", "コスト効率"],
       "datasets": [
-        {"label": "GPT-5", "data": [95, 92, 90, 85, 80, 75]},
-        {"label": "Claude 4.5", "data": [92, 88, 95, 98, 85, 80]},
-        {"label": "Gemini 2.5", "data": [88, 90, 92, 88, 95, 85]}
+        {"label": "Groq 3 (推測)", "data": [9, 7, 8, 8, 7]},
+        {"label": "NVIDIA B100 (公称)", "data": [8, 9, 9, 7, 6]}
       ]
     },
-    "job_impact": {"labels": ["新規創出", "職務変化", "自動化"], "values": [105, 140, 90]},
-    "cyber_attacks": {"labels": ["23Q4", "24Q2", "24Q4", "25Q2", "25Q4", "26Q1"], "values": [45, 70, 110, 180, 320, 500]},
-    "regional_investment": {"labels": ["北米", "アジア", "欧州", "その他"], "values": [150, 110, 85, 40]}
+    "job_impact": {"labels": ["代替される", "補完・強化される", "影響なし", "新たな職が創出"], "values": [25, 45, 15, 15]},
+    "cyber_attacks": {"labels": ["2025Q1", "2025Q2", "2025Q3", "2025Q4", "2026Q1"], "values": [280, 400, 550, 750, 1000]},
+    "regional_investment": {"labels": ["北米", "アジア", "欧州", "その他"], "values": [120, 90, 70, 30]}
   }
 }

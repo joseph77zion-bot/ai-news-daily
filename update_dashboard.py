@@ -77,6 +77,7 @@ def main():
         "risk_4_color": data["risks"][3]["color"],
         
         "investment_news": create_news_item_html(data["categories"]["investment"]),
+        "enterprise_news": create_news_item_html(data["categories"]["enterprise"]),
         "model_news": create_news_item_html(data["categories"]["model"]),
         "labor_news": create_news_item_html(data["categories"]["labor"]),
         "security_news": create_news_item_html(data["categories"]["security"]),
@@ -87,64 +88,84 @@ def main():
     for key, value in replacements.items():
         template = template.replace(f"{{{{{key}}}}}", value)
 
-    # Chart.js データの置換 (正規表現の代わりに文字列置換を使用)
-    
-    # 市場規模
+    # Chart.js データの置換
+    # stockPriceChart
     template = template.replace(
-        "labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030']",
-        f"labels: {json.dumps(data['charts']['market_size']['labels'], ensure_ascii=False)}"
+        "labels: [{{stock_price_labels}}]",
+        f"labels: {json.dumps(data['charts']['stock_price']['labels'], ensure_ascii=False)}"
     )
     template = template.replace(
-        "data: [0.5, 0.8, 1.3, 2.0, 3.2, 5.0, 8.9]",
-        f"data: {json.dumps(data['charts']['market_size']['values'])}"
-    )
-    
-    # 投資比率
-    template = template.replace(
-        "labels: ['Microsoft', 'Google', 'Amazon', 'NVIDIA', 'その他']",
-        f"labels: {json.dumps(data['charts']['investment_ratio']['labels'], ensure_ascii=False)}"
+        "data: [{{nvidia_stock_data}}]",
+        f"data: {json.dumps(data['charts']['stock_price']['nvidia_data'])}"
     )
     template = template.replace(
-        "data: [30, 25, 20, 15, 10]",
-        f"data: {json.dumps(data['charts']['investment_ratio']['values'])}"
+        "data: [{{adobe_stock_data}}]",
+        f"data: {json.dumps(data['charts']['stock_price']['adobe_data'])}"
     )
-    
-    # LLM性能 (Radar Chart)
-    # GPT-5.4 -> GPT-5
     template = template.replace(
-        "label: 'GPT-5.4',\n              data: [90, 85, 92, 88, 75, 70]",
-        f"label: '{data['charts']['llm_performance']['datasets'][0]['label']}',\n              data: {json.dumps(data['charts']['llm_performance']['datasets'][0]['data'])}"
+        "data: [{{furukawa_stock_data}}]",
+        f"data: {json.dumps(data['charts']['stock_price']['furukawa_data'])}"
     )
-    # Claude Opus 4.6 -> Claude 4.5
+
+    # aiStrategyChart
     template = template.replace(
-        "label: 'Claude Opus 4.6',\n              data: [88, 80, 90, 95, 80, 72]",
-        f"label: '{data['charts']['llm_performance']['datasets'][1]['label']}',\n              data: {json.dumps(data['charts']['llm_performance']['datasets'][1]['data'])}"
+        "labels: [{{ai_strategy_labels}}]",
+        f"labels: {json.dumps(data['charts']['ai_strategy']['labels'], ensure_ascii=False)}"
     )
-    # Gemini 3.1 -> Gemini 2.5
     template = template.replace(
-        "label: 'Gemini 3.1',\n              data: [92, 90, 88, 85, 90, 80]",
-        f"label: '{data['charts']['llm_performance']['datasets'][2]['label']}',\n              data: {json.dumps(data['charts']['llm_performance']['datasets'][2]['data'])}"
+        "data: [{{ai_strategy_data}}]",
+        f"data: {json.dumps(data['charts']['ai_strategy']['values'])}"
     )
-    
-    # 職務影響
+
+    # chipPerformanceChart
     template = template.replace(
-        "data: [97, 133, 85]",
+        "labels: [{{chip_performance_labels}}]",
+        f"labels: {json.dumps(data['charts']['chip_performance']['labels'], ensure_ascii=False)}"
+    )
+    template = template.replace(
+        "label: '{{groq_label}}'",
+        f"label: '{data['charts']['chip_performance']['datasets'][0]['label']}'"
+    )
+    template = template.replace(
+        "data: [{{groq_data}}]",
+        f"data: {json.dumps(data['charts']['chip_performance']['datasets'][0]['data'])}"
+    )
+    template = template.replace(
+        "label: '{{nvidia_chip_label}}'",
+        f"label: '{data['charts']['chip_performance']['datasets'][1]['label']}'"
+    )
+    template = template.replace(
+        "data: [{{nvidia_chip_data}}]",
+        f"data: {json.dumps(data['charts']['chip_performance']['datasets'][1]['data'])}"
+    )
+
+    # jobImpactChart
+    template = template.replace(
+        "labels: [{{job_impact_labels}}]",
+        f"labels: {json.dumps(data['charts']['job_impact']['labels'], ensure_ascii=False)}"
+    )
+    template = template.replace(
+        "data: [{{job_impact_data}}]",
         f"data: {json.dumps(data['charts']['job_impact']['values'])}"
     )
-    
-    # サイバー攻撃
+
+    # cyberAttacksChart
     template = template.replace(
-        "labels: ['2023Q1', '2023Q2', '2023Q3', '2023Q4', '2024Q1', '2024Q2', '2024Q3', '2024Q4', '2025Q1', '2025Q2', '2025Q3', '2025Q4', '2026Q1']",
-        f"labels: {json.dumps(data['charts']['cyber_attacks']['labels'])}"
+        "labels: [{{cyber_attacks_labels}}]",
+        f"labels: {json.dumps(data['charts']['cyber_attacks']['labels'], ensure_ascii=False)}"
     )
     template = template.replace(
-        "data: [10, 15, 25, 40, 60, 90, 130, 190, 280, 400, 550, 750, 1000]",
+        "data: [{{cyber_attacks_data}}]",
         f"data: {json.dumps(data['charts']['cyber_attacks']['values'])}"
     )
-    
-    # 地域別投資
+
+    # regionalInvestmentChart
     template = template.replace(
-        "data: [120, 70, 90, 30]",
+        "labels: [{{regional_investment_labels}}]",
+        f"labels: {json.dumps(data['charts']['regional_investment']['labels'], ensure_ascii=False)}"
+    )
+    template = template.replace(
+        "data: [{{regional_investment_data}}]",
         f"data: {json.dumps(data['charts']['regional_investment']['values'])}"
     )
 

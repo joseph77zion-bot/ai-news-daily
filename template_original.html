@@ -338,51 +338,48 @@
       left: -22px; top: 4px;
       width: 14px; height: 14px;
       background: var(--accent);
-      border: 3px solid var(--card);
       border-radius: 50%;
-      z-index: 1;
+      border: 2px solid var(--card);
+      box-shadow: 0 0 0 2px var(--accent);
     }
     .timeline-date { font-size: .75rem; color: var(--muted); margin-bottom: 4px; }
-    .timeline-title { font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
-    .timeline-desc { font-size: .85rem; color: #374151; line-height: 1.6; }
+    .timeline-title { font-size: .95rem; font-weight: 700; }
 
     /* ===== FOOTER ===== */
     footer {
-      background: #2c3e50;
-      color: #ecf0f1;
-      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
       padding: 24px;
-      font-size: .8rem;
+      text-align: center;
+      font-size: .78rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
       margin-top: 40px;
     }
+    footer a { color: var(--primary); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
 
     /* ===== UTILITIES ===== */
     .text-center { text-align: center; }
-    .mt-4 { margin-top: 16px; }
     .mb-4 { margin-bottom: 16px; }
-    .p-4 { padding: 16px; }
-    .bg-blue-100 { background-color: #e0f2f7; }
-    .text-blue-800 { color: #01579b; }
-    .bg-green-100 { background-color: #d4edda; }
-    .text-green-800 { color: #155724; }
-    .bg-yellow-100 { background-color: #fff3cd; }
-    .text-yellow-800 { color: #856404; }
-    .bg-red-100 { background-color: #f8d7da; }
-    .text-red-800 { color: #721c24; }
+    .mt-4 { margin-top: 16px; }
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .gap-4 { gap: 16px; }
 
-    /* ===== RESPONSIVE ===== */
+    /* Responsive adjustments */
     @media (max-width: 768px) {
-      .header-inner, .nav-tabs-inner, main { padding-left: 16px; padding-right: 16px; }
-      .header-title { font-size: 1.1rem; }
-      .hero h1 { font-size: 1.7rem; }
+      .header-inner, .nav-tabs-inner, main {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .hero h1 { font-size: 1.6rem; }
+      .hero p { font-size: .9rem; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .section-title { font-size: 1.15rem; }
-      .card-header { flex-direction: column; align-items: flex-start; }
-      .card-icon { margin-bottom: 8px; }
       .news-item { flex-direction: column; align-items: flex-start; }
       .news-num { margin-bottom: 10px; }
-      .risk-label { width: 100%; margin-bottom: 8px; }
-      .risk-row { flex-wrap: wrap; }
+      .risk-label { width: 160px; }
     }
   </style>
 </head>
@@ -391,10 +388,10 @@
   <header>
     <div class="header-inner">
       <div class="header-brand">
-        <div class="header-icon">🤖</div>
+        <div class="header-icon">✨</div>
         <div>
-          <div class="header-title">AI ビジネス デイリーブリーフィング</div>
-          <div class="header-subtitle">世界のAIビジネス最新情報を毎日お届け</div>
+          <div class="header-title">AI ビジネス</div>
+          <div class="header-subtitle">デイリーブリーフィング</div>
         </div>
       </div>
       <div class="header-date">{{date}}</div>
@@ -402,7 +399,7 @@
   </header>
 
   <div class="hero">
-    <h1>AI ビジネスの最前線</h1>
+    <h1>AIビジネスの最前線</h1>
     <p>世界のAI市場の動向、主要企業の戦略、技術革新、そしてビジネスへの影響を深く掘り下げます。</p>
     <div class="hero-stats">
       <div class="hero-stat">
@@ -424,7 +421,8 @@
     <div class="nav-tabs-inner">
       <button class="tab-btn active" data-tab="overview">概要</button>
       <button class="tab-btn" data-tab="investment">投資・市場動向</button>
-      <button class="tab-btn" data-tab="model">モデル・技術革新</button>
+      <button class="tab-btn" data-tab="enterprise">企業戦略</button>
+      <button class="tab-btn" data-tab="tech">モデル・技術革新</button>
       <button class="tab-btn" data-tab="labor">労働・社会影響</button>
       <button class="tab-btn" data-tab="security">セキュリティ・規制</button>
       <button class="tab-btn" data-tab="regional">地域別動向</button>
@@ -432,32 +430,41 @@
   </nav>
 
   <main>
+    <!-- 概要セクション -->
     <section id="overview" class="section active">
-      <h2 class="section-title">📊 概要 - 本日のハイライト</h2>
+      <h2 class="section-title">本日のハイライト</h2>
       <div class="grid-2">
         <div class="card">
           <div class="card-header">
-            <div class="card-icon bg-blue-100 text-blue-800">💡</div>
+            <div class="card-icon" style="background: #e0f2fe; color: #0288d1;">💡</div>
             <div>
               <div class="card-title">{{overview_card_1_title}}</div>
               <div class="card-source">{{overview_card_1_source}}</div>
             </div>
           </div>
-          <div class="card-body">{{overview_card_1_body}}</div>
+          <div class="card-body">
+            {{overview_card_1_body}}
+          </div>
+          <div class="highlight-box">
+            <strong>重要ポイント:</strong> 企業におけるAIエージェントの導入が本格化。データ統合とAIモデル開発の専門知識が融合し、市場競争が激化。</div>
         </div>
         <div class="card">
           <div class="card-header">
-            <div class="card-icon bg-green-100 text-green-800">🚀</div>
+            <div class="card-icon" style="background: #ffe0b2; color: #f57c00;">🚀</div>
             <div>
               <div class="card-title">{{overview_card_2_title}}</div>
               <div class="card-source">{{overview_card_2_source}}</div>
             </div>
           </div>
-          <div class="card-body">{{overview_card_2_body}}</div>
+          <div class="card-body">
+            {{overview_card_2_body}}
+          </div>
+          <div class="highlight-box">
+            <strong>重要ポイント:</strong> AIチップ競争が激化。NVIDIAはハードウェアだけでなく、ソフトウェア・プラットフォーム戦略も強化し、エコシステム全体を支配する狙い。</div>
         </div>
       </div>
 
-      <h2 class="section-title mt-4">📈 主要指標</h2>
+      <h2 class="section-title mt-4">主要指標</h2>
       <div class="grid-3">
         <div class="metric-card">
           <div class="metric-num">{{metric_1_num}}</div>
@@ -476,102 +483,115 @@
         </div>
       </div>
 
-      <h2 class="section-title mt-4">🚨 AIリスクメーター</h2>
-      <div class="card p-4">
+      <h2 class="section-title mt-4">AIリスクメーター</h2>
+      <div class="risk-meter">
         <div class="risk-row">
           <div class="risk-label">{{risk_1_label}}</div>
-          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: {{risk_1_pct}}%; background-color: {{risk_1_color}};"></div></div>
+          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: {{risk_1_pct}}%; background: {{risk_1_color}};"></div></div>
           <div class="risk-pct">{{risk_1_pct}}%</div>
         </div>
         <div class="risk-row">
           <div class="risk-label">{{risk_2_label}}</div>
-          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: {{risk_2_pct}}%; background-color: {{risk_2_color}};"></div></div>
+          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: {{risk_2_pct}}%; background: {{risk_2_color}};"></div></div>
           <div class="risk-pct">{{risk_2_pct}}%</div>
         </div>
         <div class="risk-row">
           <div class="risk-label">{{risk_3_label}}</div>
-          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: {{risk_3_pct}}%; background-color: {{risk_3_color}};"></div></div>
+          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: {{risk_3_pct}}%; background: {{risk_3_color}};"></div></div>
           <div class="risk-pct">{{risk_3_pct}}%</div>
         </div>
         <div class="risk-row">
           <div class="risk-label">{{risk_4_label}}</div>
-          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: {{risk_4_pct}}%; background-color: {{risk_4_color}};"></div></div>
+          <div class="risk-bar-bg"><div class="risk-bar-fill" style="width: {{risk_4_pct}}%; background: {{risk_4_color}};"></div></div>
           <div class="risk-pct">{{risk_4_pct}}%</div>
         </div>
       </div>
     </section>
 
+    <!-- 投資・市場動向セクション -->
     <section id="investment" class="section">
-      <h2 class="section-title">💰 投資・市場動向</h2>
-      <div class="grid-2">
-        <div class="chart-wrap">
-          <div class="chart-title">AI市場規模予測 (兆ドル)</div>
-          <div class="chart-canvas-wrap"><canvas id="marketSizeChart"></canvas></div>
-        </div>
-        <div class="chart-wrap">
-          <div class="chart-title">主要企業AI投資比率</div>
-          <div class="chart-canvas-wrap"><canvas id="investmentRatioChart"></canvas></div>
+      <h2 class="section-title">投資・市場動向</h2>
+      <div class="chart-wrap">
+        <div class="chart-title">主要AI関連銘柄の株価推移（過去1ヶ月）</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="stockPriceChart"></canvas>
         </div>
       </div>
-      <h3 class="section-title mt-4">最新ニュース</h3>
-      <div class="news-list">
-        {{investment_news}}
+      <div class="news-list" style="margin-top: 20px;">
+          {{investment_news}}
       </div>
     </section>
 
-    <section id="model" class="section">
-      <h2 class="section-title">🧠 モデル・技術革新</h2>
-      <div class="grid-2">
+    <!-- 企業戦略セクション -->
+    <section id="enterprise" class="section">
+        <h2 class="section-title">企業戦略</h2>
         <div class="chart-wrap">
-          <div class="chart-title">主要LLM性能比較</div>
-          <div class="chart-canvas-wrap"><canvas id="llmPerformanceChart"></canvas></div>
+            <div class="chart-title">主要企業のAI戦略 投資比率</div>
+            <div class="chart-canvas-wrap">
+                <canvas id="aiStrategyChart"></canvas>
+            </div>
         </div>
-        <div class="chart-wrap">
-          <div class="chart-title">AI研究論文発表数推移</div>
-          <div class="chart-canvas-wrap"><canvas id="researchPaperChart"></canvas></div>
+        <div class="news-list" style="margin-top: 20px;">
+            {{enterprise_news}}
         </div>
-      </div>
-      <h3 class="section-title mt-4">最新ニュース</h3>
-      <div class="news-list">
-        {{model_news}}
-      </div>
     </section>
 
+    <!-- モデル・技術革新セクション -->
+    <section id="tech" class="section">
+        <h2 class="section-title">モデル・技術革新</h2>
+        <div class="chart-wrap">
+            <div class="chart-title">次世代AIチップ性能比較 (推論速度)</div>
+            <div class="chart-canvas-wrap">
+                <canvas id="chipPerformanceChart"></canvas>
+            </div>
+        </div>
+        <div class="news-list" style="margin-top: 20px;">
+            {{model_news}}
+        </div>
+    </section>
+
+    <!-- 労働・社会影響セクション -->
     <section id="labor" class="section">
-      <h2 class="section-title">👥 労働・社会影響</h2>
-      <div class="chart-wrap">
-        <div class="chart-title">AIによる職務影響予測</div>
-        <div class="chart-canvas-wrap"><canvas id="jobImpactChart"></canvas></div>
-      </div>
-      <h3 class="section-title mt-4">最新ニュース</h3>
-      <div class="news-list">
-        {{labor_news}}
-      </div>
+        <h2 class="section-title">労働・社会影響</h2>
+        <div class="chart-wrap">
+            <div class="chart-title">AIによる職務内容への影響予測（今後5年）</div>
+            <div class="chart-canvas-wrap">
+                <canvas id="jobImpactChart"></canvas>
+            </div>
+        </div>
+        <div class="news-list" style="margin-top: 20px;">
+            {{labor_news}}
+        </div>
     </section>
 
+    <!-- セキュリティ・規制セクション -->
     <section id="security" class="section">
-      <h2 class="section-title">🔒 セキュリティ・規制</h2>
-      <div class="chart-wrap">
-        <div class="chart-title">AI関連サイバー攻撃件数推移</div>
-        <div class="chart-canvas-wrap"><canvas id="cyberAttackChart"></canvas></div>
-      </div>
-      <h3 class="section-title mt-4">最新ニュース</h3>
-      <div class="news-list">
-        {{security_news}}
-      </div>
+        <h2 class="section-title">セキュリティ・規制</h2>
+        <div class="chart-wrap">
+            <div class="chart-title">AI関連サイバー攻撃の検知数推移</div>
+            <div class="chart-canvas-wrap">
+                <canvas id="cyberAttacksChart"></canvas>
+            </div>
+        </div>
+        <div class="news-list" style="margin-top: 20px;">
+            {{security_news}}
+        </div>
     </section>
 
+    <!-- 地域別動向セクション -->
     <section id="regional" class="section">
-      <h2 class="section-title">🗺️ 地域別動向</h2>
-      <div class="chart-wrap">
-        <div class="chart-title">地域別AI投資額</div>
-        <div class="chart-canvas-wrap"><canvas id="regionalInvestmentChart"></canvas></div>
-      </div>
-      <h3 class="section-title mt-4">最新ニュース</h3>
-      <div class="news-list">
-        {{regional_news}}
-      </div>
+        <h2 class="section-title">地域別動向</h2>
+        <div class="chart-wrap">
+            <div class="chart-title">地域別AI投資額（兆ドル）</div>
+            <div class="chart-canvas-wrap">
+                <canvas id="regionalInvestmentChart"></canvas>
+            </div>
+        </div>
+        <div class="news-list" style="margin-top: 20px;">
+            {{regional_news}}
+        </div>
     </section>
+
   </main>
 
   <footer>
@@ -579,65 +599,67 @@
   </footer>
 
   <script>
-    // タブ切り替え機能
-    document.addEventListener('DOMContentLoaded', () => {
-      const tabButtons = document.querySelectorAll('.tab-btn');
-      const sections = document.querySelectorAll('.section');
-
-      tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          tabButtons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
-
-          const targetTab = button.dataset.tab;
-          sections.forEach(section => {
-            if (section.id === targetTab) {
-              section.classList.add('active');
-            } else {
-              section.classList.remove('active');
-            }
-          });
+    document.addEventListener("DOMContentLoaded", function () {
+      // Tab switching
+      const tabButtons = document.querySelectorAll(".tab-btn");
+      const sections = document.querySelectorAll(".section");
+      tabButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          tabButtons.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          sections.forEach(s => s.classList.toggle("active", s.id === btn.dataset.tab));
         });
       });
 
-      // Chart.js の設定
-      Chart.defaults.font.family = "'Segoe UI', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif";
-      Chart.defaults.color = '#4a5568';
-
-      // AI市場規模予測 (棒グラフ)
-      const marketSizeCtx = document.getElementById('marketSizeChart').getContext('2d');
-      new Chart(marketSizeCtx, {
-        type: 'bar',
+      // Chart.js initialization
+      // 投資・市場動向セクション - 株価推移
+      new Chart(document.getElementById("stockPriceChart"), {
+        type: 'line',
         data: {
-          labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030'],
-          datasets: [{
-            label: '市場規模 (兆ドル)',
-            data: [0.5, 0.8, 1.3, 2.0, 3.2, 5.0, 8.9],
-            backgroundColor: 'rgba(15, 76, 129, 0.8)',
-            borderColor: 'rgba(15, 76, 129, 1)',
-            borderWidth: 1
-          }]
+          labels: [{{stock_price_labels}}],
+          datasets: [
+            {
+              label: 'NVIDIA (NVDA)',
+              data: [{{nvidia_stock_data}}],
+              borderColor: '#76B900',
+              backgroundColor: 'rgba(118, 185, 0, 0.2)',
+              fill: false,
+              tension: 0.3
+            },
+            {
+              label: 'Adobe (ADBE)',
+              data: [{{adobe_stock_data}}],
+              borderColor: '#FF0000',
+              backgroundColor: 'rgba(255, 0, 0, 0.2)',
+              fill: false,
+              tension: 0.3
+            },
+            {
+              label: '古河電工 (5801.T)',
+              data: [{{furukawa_stock_data}}],
+              borderColor: '#00539B',
+              backgroundColor: 'rgba(0, 83, 155, 0.2)',
+              fill: false,
+              tension: 0.3
+            }
+          ]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: {
-            y: { beginAtZero: true, title: { display: true, text: '兆ドル' } },
-            x: { title: { display: true, text: '年' } }
-          }
+          plugins: { legend: { position: 'top' } },
+          scales: { y: { beginAtZero: false } }
         }
       });
 
-      // 主要企業AI投資比率 (ドーナツグラフ)
-      const investmentRatioCtx = document.getElementById('investmentRatioChart').getContext('2d');
-      new Chart(investmentRatioCtx, {
+      // 企業戦略セクション - AI戦略投資比率
+      new Chart(document.getElementById("aiStrategyChart"), {
         type: 'doughnut',
         data: {
-          labels: ['Microsoft', 'Google', 'Amazon', 'NVIDIA', 'その他'],
+          labels: [{{ai_strategy_labels}}],
           datasets: [{
-            data: [30, 25, 20, 15, 10],
-            backgroundColor: ['#0f4c81', '#00b4d8', '#f77f00', '#10b981', '#64748b'],
+            data: [{{ai_strategy_data}}],
+            backgroundColor: ['#0f4c81', '#00b4d8', '#f77f00', '#64748b'],
             hoverOffset: 4
           }]
         },
@@ -648,121 +670,75 @@
         }
       });
 
-      // 主要LLM性能比較 (レーダーチャート)
-      const llmPerformanceCtx = document.getElementById('llmPerformanceChart').getContext('2d');
-      new Chart(llmPerformanceCtx, {
+      // モデル・技術革新セクション - 次世代AIチップ性能比較
+      new Chart(document.getElementById("chipPerformanceChart"), {
         type: 'radar',
         data: {
-          labels: ['推論能力', 'コード生成', '多言語対応', '安全性', '速度', 'コスト効率'],
+          labels: [{{chip_performance_labels}}],
           datasets: [
             {
-              label: 'GPT-5.4',
-              data: [90, 85, 92, 88, 75, 70],
-              backgroundColor: 'rgba(15, 76, 129, 0.2)',
-              borderColor: 'rgba(15, 76, 129, 1)',
-              pointBackgroundColor: 'rgba(15, 76, 129, 1)',
-              pointBorderColor: '#fff',
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: 'rgba(15, 76, 129, 1)'
-            },
-            {
-              label: 'Claude Opus 4.6',
-              data: [88, 80, 90, 95, 80, 72],
-              backgroundColor: 'rgba(0, 180, 216, 0.2)',
-              borderColor: 'rgba(0, 180, 216, 1)',
-              pointBackgroundColor: 'rgba(0, 180, 216, 1)',
-              pointBorderColor: '#fff',
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: 'rgba(0, 180, 216, 1)'
-            },
-            {
-              label: 'Gemini 3.1',
-              data: [92, 90, 88, 85, 90, 80],
+              label: '{{groq_label}}',
+              data: [{{groq_data}}],
               backgroundColor: 'rgba(247, 127, 0, 0.2)',
               borderColor: 'rgba(247, 127, 0, 1)',
               pointBackgroundColor: 'rgba(247, 127, 0, 1)',
               pointBorderColor: '#fff',
               pointHoverBackgroundColor: '#fff',
               pointHoverBorderColor: 'rgba(247, 127, 0, 1)'
+            },
+            {
+              label: '{{nvidia_chip_label}}',
+              data: [{{nvidia_chip_data}}],
+              backgroundColor: 'rgba(15, 76, 129, 0.2)',
+              borderColor: 'rgba(15, 76, 129, 1)',
+              pointBackgroundColor: 'rgba(15, 76, 129, 1)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgba(15, 76, 129, 1)'
             }
           ]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          plugins: { legend: { position: 'top' } },
           scales: {
             r: {
               angleLines: { display: false },
               suggestedMin: 0,
-              suggestedMax: 100,
-              pointLabels: { font: { size: 12 } }
+              suggestedMax: 10
             }
-          },
-          plugins: { legend: { position: 'top' } }
+          }
         }
       });
 
-      // AI研究論文発表数推移 (折れ線グラフ)
-      const researchPaperCtx = document.getElementById('researchPaperChart').getContext('2d');
-      new Chart(researchPaperCtx, {
-        type: 'line',
+      // 労働・社会影響セクション - AIによる職務内容への影響予測
+      new Chart(document.getElementById("jobImpactChart"), {
+        type: 'pie',
         data: {
-          labels: ['2021', '2022', '2023', '2024', '2025', '2026'],
+          labels: [{{job_impact_labels}}],
           datasets: [{
-            label: '論文数 (千件)',
-            data: [120, 180, 250, 350, 480, 600],
-            borderColor: 'rgba(16, 185, 129, 1)',
-            backgroundColor: 'rgba(16, 185, 129, 0.2)',
-            fill: true,
-            tension: 0.3
+            data: [{{job_impact_data}}],
+            backgroundColor: ['#ef4444', '#10b981', '#64748b', '#00b4d8'],
+            hoverOffset: 4
           }]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: {
-            y: { beginAtZero: true, title: { display: true, text: '論文数 (千件)' } },
-            x: { title: { display: true, text: '年' } }
-          }
+          plugins: { legend: { position: 'right' } }
         }
       });
 
-      // AIによる職務影響予測 (棒グラフ)
-      const jobImpactCtx = document.getElementById('jobImpactChart').getContext('2d');
-      new Chart(jobImpactCtx, {
-        type: 'bar',
-        data: {
-          labels: ['新規創出', '変化', '自動化'],
-          datasets: [{
-            label: '職務数 (百万件)',
-            data: [97, 133, 85],
-            backgroundColor: ['#0f4c81', '#f77f00', '#ef4444'],
-            borderColor: ['#0f4c81', '#f77f00', '#ef4444'],
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: {
-            y: { beginAtZero: true, title: { display: true, text: '職務数 (百万件)' } },
-            x: { title: { display: true, text: '影響' } }
-          }
-        }
-      });
-
-      // AI関連サイバー攻撃件数推移 (折れ線グラフ)
-      const cyberAttackCtx = document.getElementById('cyberAttackChart').getContext('2d');
-      new Chart(cyberAttackCtx, {
+      // セキュリティ・規制セクション - AI関連サイバー攻撃の検知数推移
+      new Chart(document.getElementById("cyberAttacksChart"), {
         type: 'line',
         data: {
-          labels: ['2023Q1', '2023Q2', '2023Q3', '2023Q4', '2024Q1', '2024Q2', '2024Q3', '2024Q4', '2025Q1', '2025Q2', '2025Q3', '2025Q4', '2026Q1'],
+          labels: [{{cyber_attacks_labels}}],
           datasets: [{
-            label: '攻撃件数 (万件)',
-            data: [10, 15, 25, 40, 60, 90, 130, 190, 280, 400, 550, 750, 1000],
-            borderColor: 'rgba(239, 68, 68, 1)',
+            label: '検知数 (千件)',
+            data: [{{cyber_attacks_data}}],
+            borderColor: '#ef4444',
             backgroundColor: 'rgba(239, 68, 68, 0.2)',
             fill: true,
             tension: 0.3
@@ -772,24 +748,20 @@
           responsive: true,
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
-          scales: {
-            y: { beginAtZero: true, title: { display: true, text: '攻撃件数 (万件)' } },
-            x: { title: { display: true, text: '四半期' } }
-          }
+          scales: { y: { beginAtZero: true } }
         }
       });
 
-      // 地域別AI投資額 (棒グラフ)
-      const regionalInvestmentCtx = document.getElementById('regionalInvestmentChart').getContext('2d');
-      new Chart(regionalInvestmentCtx, {
+      // 地域別動向セクション - 地域別AI投資額
+      new Chart(document.getElementById("regionalInvestmentChart"), {
         type: 'bar',
         data: {
-          labels: ['北米', '欧州', 'アジア', 'その他'],
+          labels: [{{regional_investment_labels}}],
           datasets: [{
-            label: '投資額 (十億ドル)',
-            data: [120, 70, 90, 30],
-            backgroundColor: ['#0f4c81', '#00b4d8', '#f77f00', '#64748b'],
-            borderColor: ['#0f4c81', '#00b4d8', '#f77f00', '#64748b'],
+            label: '投資額 (兆ドル)',
+            data: [{{regional_investment_data}}],
+            backgroundColor: ['#0f4c81', '#f77f00', '#00b4d8', '#64748b'],
+            borderColor: ['#0f4c81', '#f77f00', '#00b4d8', '#64748b'],
             borderWidth: 1
           }]
         },
@@ -797,14 +769,12 @@
           responsive: true,
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
-          scales: {
-            y: { beginAtZero: true, title: { display: true, text: '投資額 (十億ドル)' } },
-            x: { title: { display: true, text: '地域' } }
-          }
+          scales: { y: { beginAtZero: true } }
         }
       });
 
     });
   </script>
+
 </body>
 </html>
