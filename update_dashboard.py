@@ -8,10 +8,10 @@ import yfinance as yf
 def fetch_latest_ai_news():
     url = "https://www.artificialintelligence-news.com/"
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Herring/90.1.1161.2"
     }
     try:
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(url, headers=headers, timeout=30)
         response.raise_for_status() # HTTPエラーがあれば例外を発生させる
         soup = BeautifulSoup(response.content, "html.parser")
         
@@ -68,7 +68,9 @@ def create_news_item_html(news_list):
     return html_output
 
 def main():
-    current_date = datetime.now().strftime("%Y年%m月%d日")
+    from datetime import timedelta, timezone
+    jst = timezone(timedelta(hours=9))
+    current_date = datetime.now(jst).strftime("%Y年%m月%d日")
 
     # リアルタイムデータの取得
     latest_news = fetch_latest_ai_news()
