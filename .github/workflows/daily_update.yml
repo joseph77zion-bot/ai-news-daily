@@ -15,9 +15,9 @@ jobs:
           token: ${{ secrets.GH_PAT }}
 
       - name: Set up Python
-        uses: actions/python-3.10@v4
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
@@ -34,7 +34,7 @@ jobs:
 
           while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
             echo "Attempting update (Attempt $((RETRY_COUNT + 1)))..."
-            python update_dashboard_v2.py && SUCCESS=true && break
+            python update_dashboard.py && SUCCESS=true && break
             RETRY_COUNT=$((RETRY_COUNT + 1))
             if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
               echo "Update failed. Retrying in 15 minutes..."
