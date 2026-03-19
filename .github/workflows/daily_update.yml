@@ -70,18 +70,22 @@ jobs:
           DEPLOY_URL="https://${{ github.repository_owner }}.github.io/${REPO_NAME}/"
           echo "Verifying deployment at: $DEPLOY_URL"
           
-          # サイトが更新されるまで待機（最大60秒）
-          for i in $(seq 1 12);
+          # GitHub Pagesの反映を待機（5分間）
+          echo "Waiting 5 minutes for GitHub Pages to reflect changes..."
+          sleep 300
+
+          # その後、サイトが更新されるまで検証（最大5分間、30秒ごとにリトライ）
+          for i in $(seq 1 10);
           do
             echo "Attempt $i: Checking $DEPLOY_URL for latest content..."
             # 最新の日付文字列を生成
             CURRENT_DATE=$(date +"%Y年%m月%d日")
             # 公開URLの内容を取得し、最新の日付が含まれているか確認
-            if curl -s $DEPLOY_URL | grep -q "${CURRENT_DATE}"; then
+            if curl -s "${DEPLOY_URL}?v=$(date +%s)" | grep -q "${CURRENT_DATE}"; then
               echo "Deployment verified successfully!"
               exit 0
             fi
-            sleep 5
+            sleep 30
           done
           echo "Deployment verification failed: Latest date not found on $DEPLOY_URL"
           exit 1
