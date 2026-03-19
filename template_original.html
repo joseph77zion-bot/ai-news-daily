@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI ビジネス デイリーブリーフィング | {{date}}</title>
+  <title>AI ビジネス デイリーブリーフィング | {{date}} {{current_time_seconds}}</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     /* ===== RESET & BASE ===== */
@@ -394,7 +394,7 @@
           <div class="header-subtitle">デイリーブリーフィング</div>
         </div>
       </div>
-      <div class="header-date">{{date}}</div>
+      <div class="header-date">{{date}} {{current_time_seconds}}</div>
     </div>
   </header>
 
@@ -402,18 +402,30 @@
     <h1>AIビジネスの最前線</h1>
     <p>世界のAI市場の動向、主要企業の戦略、技術革新、そしてビジネスへの影響を深く掘り下げます。</p>
     <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num">{{hero_stat_1_num}}</div>
-        <div class="hero-stat-label">{{hero_stat_1_label}}</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">{{hero_stat_2_num}}</div>
-        <div class="hero-stat-label">{{hero_stat_2_label}}</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">{{hero_stat_3_num}}</div>
-        <div class="hero-stat-label">{{hero_stat_3_label}}</div>
-      </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">{{hero_stat_1_num}}</div>
+              <div class="hero-stat-label">{{hero_stat_1_label}}</div>
+              <div class="metric-change {{hero_stat_1_change_class}}">
+                <span class="metric-change-icon">{{hero_stat_1_change_icon}}</span>
+                <span class="metric-change-value">{{hero_stat_1_change_value}}</span>
+              </div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">{{hero_stat_2_num}}</div>
+              <div class="hero-stat-label">{{hero_stat_2_label}}</div>
+              <div class="metric-change {{hero_stat_2_change_class}}">
+                <span class="metric-change-icon">{{hero_stat_2_change_icon}}</span>
+                <span class="metric-change-value">{{hero_stat_2_change_value}}</span>
+              </div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">{{hero_stat_3_num}}</div>
+              <div class="hero-stat-label">{{hero_stat_3_label}}</div>
+              <div class="metric-change {{hero_stat_3_change_class}}">
+                <span class="metric-change-icon">{{hero_stat_3_change_icon}}</span>
+                <span class="metric-change-value">{{hero_stat_3_change_value}}</span>
+              </div>
+            </div>
     </div>
   </div>
 

@@ -26,7 +26,7 @@ def fetch_latest_ai_news():
             if title_element and summary_element:
                 title = title_element.text.strip()
                 summary = summary_element.text.strip()
-                news_items.append({"title": title, "description": summary, "tags": ["AI", "最新"]})
+                news_items.append({"title": title, "description": summary, "tags": ["AI", "最新"], "timestamp": datetime.now(jst).isoformat()})
                 if len(news_items) >= 5: # 5件取得したら終了
                     break
         return news_items
@@ -41,24 +41,39 @@ def fetch_stock_data(ticker):
         if not hist.empty:
             latest_close = hist["Close"].iloc[-1]
             previous_close = hist["Close"].iloc[-2]
-            change = (latest_close - previous_close) / previous_close * 100
+            change = (latest_close - previous_close) / previous_close * 100 if previous_close != 0 else 0
             change_class = "up" if change > 0 else "down"
             change_icon = "▲" if change > 0 else "▼"
-            return {"num": f"{latest_close:.2f}", "label": f"{ticker}", "change_class": change_class, "change_icon": change_icon, "change_value": f"{abs(change):.2f}%", "history": hist["Close"].tolist()}
+            return {"num": f"{latest_close:.2f}", "label": f"{ticker}", "change_class": change_class, "change_icon": change_icon, "change_value": f"{abs(change):.2f}%", "history": hist["Close"].tolist(), "previous_close": previous_close}
         return None
     except Exception as e:
         print(f"{ticker}の株価取得エラー: {e}")
         return None
 
 def create_news_item_html(news_list):
+    from datetime import timedelta, timezone
     html_output = ""
+    jst = timezone(timedelta(hours=9))
+    now = datetime.now(jst)
     for i, news in enumerate(news_list):
         tags_html = "".join([f'<span class="news-badge bg-blue-100 text-blue-800">{tag}</span>' for tag in news.get("tags", [])])
+        
+        # [NEW]バッジの追加
+        is_new = False
+        if "timestamp" in news:
+            try:
+                news_timestamp = datetime.fromisoformat(news["timestamp"]).astimezone(jst)
+                if (now - news_timestamp).total_seconds() < 24 * 3600: # 24時間以内であればNEW
+                    is_new = True
+            except ValueError:
+                # タイムスタンプの形式が不正な場合はNEWとしない
+                pass
+        new_badge_html = '<span class="news-badge bg-red-500 text-white animate-pulse">NEW</span>' if is_new else ''
         html_output += f"""
         <div class="news-item">
           <div class="news-num">{i + 1}</div>
           <div class="news-content">
-            <div class="news-title">{news["title"]}</div>
+            <div class="news-title">{new_badge_html} {news["title"]}</div>
             <div class="news-desc">{news["description"]}</div>
             <div class="news-meta">
               {tags_html}
@@ -70,7 +85,14 @@ def create_news_item_html(news_list):
 def main():
     from datetime import timedelta, timezone
     jst = timezone(timedelta(hours=9))
-    current_date = datetime.now(jst).strftime("%Y年%m月%d日")
+    current_datetime = datetime.now(jst)
+    current_date = current_datetime.strftime("%Y年%m月%d日")
+    current_time_seconds = current_datetime.strftime("%H:%M:%S JST")
+    from datetime import timedelta, timezone
+    jst = timezone(timedelta(hours=9))
+    current_datetime = datetime.now(jst)
+    current_date = current_datetime.strftime("%Y年%m月%d日")
+    current_time_seconds = current_datetime.strftime("%H:%M:%S JST")
 
     # リアルタイムデータの取得
     latest_news = fetch_latest_ai_news()
@@ -82,9 +104,9 @@ def main():
     data = {
         "date": current_date,
         "hero_stats": {
-            "stat1": {"num": "N/A", "label": "NVIDIA 時価総額"},
-            "stat2": {"num": "N/A", "label": "Alibaba Cloud 売上予測"},
-            "stat3": {"num": "N/A", "label": "NVIDIA (NVDA)"}
+            "stat1": {"num": "N/A", "label": "NVIDIA (NVDA)", "change_class": "", "change_icon": "", "change_value": ""},
+            "stat2": {"num": "N/A", "label": "Adobe (ADBE)", "change_class": "", "change_icon": "", "change_value": ""},
+            "stat3": {"num": "N/A", "label": "古河電工 (5801.T)", "change_class": "", "change_icon": "", "change_value": ""}
         },
         "overview": [],
         "metrics": [],
@@ -120,8 +142,11 @@ def main():
 
     # ヒーロースタッツの更新
     if nvidia_stock:
-        data["hero_stats"]["stat1"]["num"] = f"{nvidia_stock['num']}ドル"
-        data["hero_stats"]["stat3"] = nvidia_stock
+        data["hero_stats"]["stat1"] = nvidia_stock
+    if adobe_stock:
+        data["hero_stats"]["stat2"] = adobe_stock
+    if furukawa_stock:
+        data["hero_stats"]["stat3"] = furukawa_stock
 
     # 概要ニュースの更新
     if latest_news:
@@ -158,12 +183,22 @@ def main():
     # 置換用辞書の作成
     replacements = {
         "date": data["date"],
+        "current_time_seconds": current_time_seconds,
         "hero_stat_1_num": data["hero_stats"]["stat1"]["num"],
         "hero_stat_1_label": data["hero_stats"]["stat1"]["label"],
+        "hero_stat_1_change_class": data["hero_stats"]["stat1"]["change_class"],
+        "hero_stat_1_change_icon": data["hero_stats"]["stat1"]["change_icon"],
+        "hero_stat_1_change_value": data["hero_stats"]["stat1"]["change_value"],
         "hero_stat_2_num": data["hero_stats"]["stat2"]["num"],
         "hero_stat_2_label": data["hero_stats"]["stat2"]["label"],
+        "hero_stat_2_change_class": data["hero_stats"]["stat2"]["change_class"],
+        "hero_stat_2_change_icon": data["hero_stats"]["stat2"]["change_icon"],
+        "hero_stat_2_change_value": data["hero_stats"]["stat2"]["change_value"],
         "hero_stat_3_num": data["hero_stats"]["stat3"]["num"],
         "hero_stat_3_label": data["hero_stats"]["stat3"]["label"],
+        "hero_stat_3_change_class": data["hero_stats"]["stat3"]["change_class"],
+        "hero_stat_3_change_icon": data["hero_stats"]["stat3"]["change_icon"],
+        "hero_stat_3_change_value": data["hero_stats"]["stat3"]["change_value"],
         
         "overview_card_1_title": data["overview"][0]['title'] if len(data["overview"]) > 0 else "",
         "overview_card_1_source": data["overview"][0]['source'] if len(data["overview"]) > 0 else "",
