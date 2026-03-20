@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: "0 23 * * *" # 毎日 JST 08:00 (UTC 23:00)
     - cron: "5 23 * * *" # 毎日 JST 08:05 (UTC 23:05) - 予備トリガー
+  repository_dispatch:
+    types: [external_trigger]
   workflow_dispatch: # 手動実行用
 
 jobs:
@@ -20,9 +22,15 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Install dependencies
         run: |
           pip install requests beautifulsoup4 pandas yfinance
+          npm install puppeteer
 
       - name: Run Update Script with Retry Logic
         id: update
@@ -65,28 +73,41 @@ jobs:
           publish_dir: .
 
       - name: Verify Deployment
+        id: verify_deployment
         run: |
-          # GitHub PagesのURLを構築
           REPO_NAME=$(echo ${{ github.repository }} | cut -d '/' -f 2)
           DEPLOY_URL="https://${{ github.repository_owner }}.github.io/${REPO_NAME}/"
           echo "Verifying deployment at: $DEPLOY_URL"
           
-          # GitHub Pagesの反映を待機（5分間）
           echo "Waiting 5 minutes for GitHub Pages to reflect changes..."
           sleep 300
 
-          # その後、サイトが更新されるまで検証（最大5分間、30秒ごとにリトライ）
           for i in $(seq 1 10);
           do
             echo "Attempt $i: Checking $DEPLOY_URL for latest content..."
-            # 最新の日付文字列を生成
             CURRENT_DATE=$(date +"%Y年%m月%d日")
-            # 公開URLの内容を取得し、最新の日付が含まれているか確認
             if curl -s "${DEPLOY_URL}?v=$(date +%s)" | grep -q "${CURRENT_DATE}"; then
               echo "Deployment verified successfully!"
+              echo "::set-output name=deployment_url::$DEPLOY_URL"
               exit 0
             fi
             sleep 30
           done
           echo "Deployment verification failed: Latest date not found on $DEPLOY_URL"
           exit 1
+
+      - name: Take Screenshot
+        if: steps.verify_deployment.outcome == 'success'
+        run: |
+          REPO_NAME=$(echo ${{ github.repository }} | cut -d '/' -f 2)
+          DEPLOY_URL="https://${{ github.repository_owner }}.github.io/${REPO_NAME}/"
+          node screenshot.js ${{ steps.verify_deployment.outputs.deployment_url }} ./screenshot.png
+
+      - name: Upload Screenshot
+        uses: actions/upload-artifact@v3
+        if: steps.verify_deployment.outcome == 'success'
+        with:
+          name: dashboard-screenshot
+          path: ./screenshot.png
+          
+
